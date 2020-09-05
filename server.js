@@ -24,9 +24,10 @@ app.use((req, res, next) => {
 
 connectDB()
 
-
+//Logging with morgan
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
+//Create the log string structure for morgan
 app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms', { stream: accessLogStream }))
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
