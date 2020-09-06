@@ -92,3 +92,8 @@ config/config.env
 .dynamodb/
 
 ssl/
+
+# firebase
+firebaseConfig
+
+client/config/firebaseConfig.js
