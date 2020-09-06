@@ -5,7 +5,7 @@
    4. Go to project overview and look for a code similar to this one below and copy/paste the entire code here
 */
 
-const firebaseConfig = {
+ export const firebaseConfig = {
   apiKey: "AIzaSyDS_HJLBNbKYbjhvjhvmbbvjhvbvb",
   authDomain: "<your-app-name>.firebaseapp.com",
   databaseURL: "https://<your-app-name>.firebaseio.com",
@@ -14,5 +14,3 @@ const firebaseConfig = {
   messagingSenderId: "will be some numbers",
   appId: "Long string of characters"
 };
-
-export default firebaseConfig;
