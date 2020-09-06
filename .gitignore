@@ -97,3 +97,5 @@ ssl/
 firebaseConfig
 
 client/config/firebaseConfig.js
+
+firebaseConfig.js
