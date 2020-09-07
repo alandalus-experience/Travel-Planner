@@ -10,6 +10,7 @@ import MainNav from '../components/Navigation/MainNav';
 // Other Imports
 import {registerUser} from '../utils/firebase';
 
+
 class RegisterUser extends Component {
   constructor(props) {
     super(props);
@@ -29,9 +30,16 @@ class RegisterUser extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    //TODO: add input checks and everything else here before registerUser runs
-    registerUser(this.state.email, this.state.password); 
+    if (this.state.password === this.state.password2) {
+      registerUser(this.state.email, this.state.password);
+      return
+    }
+    //TODO: handle validation errors and show them on the screen
+    console.log("passwords don't match");
+
   }
+
+
 
   render() {
     return (
@@ -45,15 +53,15 @@ class RegisterUser extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Email:
-          <input type="text" onChange={event => this.handleChange(event, "email")} />
+          <input type="email" onChange={event => this.handleChange(event, "email")} value={this.state.email} required/>
         </label>
         <label>
           Password:
-          <input type="password" onChange={event => this.handleChange(event, "password")} />
+          <input type="password" onChange={event => this.handleChange(event, "password")} value={this.state.password} minLength={8} maxLength={256} required/>
         </label>       
         <label>
           Confirm password:
-          <input type="password" onChange={event => this.handleChange(event, "password2")} />
+          <input type="password" onChange={event => this.handleChange(event, "password2")} value={this.state.password2} required/>
         </label>
         <input type="submit" value="Register" />
       </form>
@@ -63,4 +71,3 @@ class RegisterUser extends Component {
 }
 
 export default RegisterUser;
-
