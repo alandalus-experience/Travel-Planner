@@ -11,44 +11,20 @@ import MainNav from '../components/Navigation/MainNav';
 // Other Imports
 import { loginUser } from '../utils/firebase';
 import { formValidators } from '../utils/formValidators';
-
-
+import { onError } from '../utils/formErrors';
 
 function LoginUser() {
 
-  const { register, handleSubmit, errors, watch } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
     loginUser(data.Email, data.Password)
   }
 
-  const onError = (errors) => {
-
-    if (errors.Email) {
-      if(errors.Email?.type === "required") {
-        errors.Email.message = 'Email field cannot be empty';
-      } else if(errors.Email?.type === "pattern") {
-        errors.Email.message = 'Email should look like this: myemail@example.com'
-      }
-    }
-    
-    if (errors.Password) {
-      if (errors.Password?.type === "required") {
-        errors.Password.message = "Password can\'t be empty"
-      } else if (errors.Password?.type === "minLength") {
-        errors.Password.message = "Password is more than 8 characters"
-      }  else if (errors.Password?.type === "maxLength") {
-        errors.Password.message = "Password is less than 256 characters"
-      }
-    }
-    
-    return errors
-  }
-
   return (
     <>
     <Head>
-      <title>Travel Planner - Register</title>
+      <title>Travel Planner - Login</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <MainNav />
