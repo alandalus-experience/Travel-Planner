@@ -2,72 +2,75 @@
 import Head from 'next/head'
 
 // React modules
-import React, { Component } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
 // Components
 import MainNav from '../components/Navigation/MainNav';
 
 // Other Imports
-import {registerUser} from '../utils/firebase';
+import { registerUser } from '../utils/firebase';
 
 
-class RegisterUser extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      password2: ''
-    };
+
+function RegisterUser() {
+
+  const { register, handleSubmit, errors, watch } = useForm();
+
+  const onSubmit = (data) => {
+    registerUser(data.Email, data.Password)
   }
 
-  handleChange = (event, key) => {
-    this.setState({
-      [key]: event.target.value
-    });
-  }
+  const onError = (errors) => {
 
-  handleSubmit = event => {
-    event.preventDefault();
-
-    if (this.state.password === this.state.password2) {
-      registerUser(this.state.email, this.state.password);
-      return
+    if (errors.Email) {
+      if(errors.Email?.type === "required") {
+        errors.Email.message = 'Email field cannot be empty';
+      } else if(errors.Email?.type === "pattern") {
+        errors.Email.message = 'Email should look like this: myemail@example.com'
+      }
     }
-    //TODO: handle validation errors and show them on the screen
-    console.log("passwords don't match");
-
+    
+    if (errors.Password) {
+      if (errors.Password?.type === "required") {
+        errors.Password.message = "Password can\'t be empty"
+      } else if (errors.Password?.type === "minLength") {
+        errors.Password.message = "Password must be more than 8 characters"
+      }  else if (errors.Password?.type === "maxLength") {
+        errors.Password.message = "Password must be less than 256 characters"
+      }
+    }
+    
+    if (errors.Password2?.type === "validate") {
+      console.log(errors.password2);
+      errors.Password2.message = "Passwords don't match"
+    }
+    
+    return errors
   }
 
+  return (
+    <>
+    <Head>
+      <title>Travel Planner - Register</title>
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head>
+    <MainNav />
+    {/* TODO: Form has to become a component and depending on the number input fields should render login or register pages accordingly*/}
+    <form onSubmit={handleSubmit(onSubmit, onError)}>
 
+      <input type="text" placeholder="Email" name="Email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
+      {errors.Email ? <span>{errors.Email.message}</span> : null}
 
-  render() {
-    return (
-      <>
-      <Head>
-        <title>Travel Planner - Register</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <MainNav />
-      {/* TODO: Form has to become a component and depending on the number input fields should render login or register pages accordingly*/}
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Email:
-          <input type="email" onChange={event => this.handleChange(event, "email")} value={this.state.email} required/>
-        </label>
-        <label>
-          Password:
-          <input type="password" onChange={event => this.handleChange(event, "password")} value={this.state.password} minLength={8} maxLength={256} required/>
-        </label>       
-        <label>
-          Confirm password:
-          <input type="password" onChange={event => this.handleChange(event, "password2")} value={this.state.password2} required/>
-        </label>
-        <input type="submit" value="Register" />
-      </form>
-      </>
-    );
-  }
+      <input type="password" placeholder="Password" name="Password" ref={register({required: true, maxLength: 256, minLength: 8})} />
+      {errors.Password ? <span>{errors.Password.message}</span> : null}
+
+      <input type="password" placeholder="Confirm Password" name="Password2" ref={register({validate: (value) => {return value === watch('Password')}})} />
+      {errors.Password2 ? <span>{errors.Password2.message}</span> : null}
+      <input type="submit" value="Register" />
+    </form>
+    </>
+  );
 }
 
 export default RegisterUser;
