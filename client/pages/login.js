@@ -2,59 +2,68 @@
 import Head from 'next/head'
 
 // React modules
-import React, { Component } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
 // Components
 import MainNav from '../components/Navigation/MainNav';
 
-// Other imports
-//TODO: Implement loginUser functionality
-import {loginUser} from '../utils/firebase';
+// Other Imports
+import { loginUser } from '../utils/firebase';
 
-class LoginUser extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: ''
-    };
+
+
+function LoginUser() {
+
+  const { register, handleSubmit, errors, watch } = useForm();
+
+  const onSubmit = (data) => {
+    loginUser(data.Email, data.Password)
   }
 
-  handleChange = (event, key) => {
-    this.setState({
-      [key]: event.target.value
-    });
+  const onError = (errors) => {
+
+    if (errors.Email) {
+      if(errors.Email?.type === "required") {
+        errors.Email.message = 'Email field cannot be empty';
+      } else if(errors.Email?.type === "pattern") {
+        errors.Email.message = 'Email should look like this: myemail@example.com'
+      }
+    }
+    
+    if (errors.Password) {
+      if (errors.Password?.type === "required") {
+        errors.Password.message = "Password can\'t be empty"
+      } else if (errors.Password?.type === "minLength") {
+        errors.Password.message = "Password is be more than 8 characters"
+      }  else if (errors.Password?.type === "maxLength") {
+        errors.Password.message = "Password is be less than 256 characters"
+      }
+    }
+    
+    return errors
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
+  return (
+    <>
+    <Head>
+      <title>Travel Planner - Register</title>
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head>
+    <MainNav />
+    {/* TODO: Form has to become a component and depending on the number input fields should render login or register pages accordingly*/}
+    <form onSubmit={handleSubmit(onSubmit, onError)}>
 
-    //TODO: add input checks and everything else here before loginUser runs
-    // loginUser(this.state.email, this.state.password); 
-  }
+      <input type="text" placeholder="Email" name="Email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
+      {errors.Email ? <span>{errors.Email.message}</span> : null}
 
-  render() {
-    return (
-      <>
-      <Head>
-        <title>Travel Planner - Login</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <MainNav />
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Email:
-          <input type="text" onChange={event => this.handleChange(event, "email")} />
-        </label>
-        <label>
-          Password:
-          <input type="password" onChange={event => this.handleChange(event, "password")} />
-        </label>       
-        <input type="submit" value="Login" />
-      </form>
-      </>
-    );
-  }
+      <input type="password" placeholder="Password" name="Password" ref={register({required: true, maxLength: 256, minLength: 8})} />
+      {errors.Password ? <span>{errors.Password.message}</span> : null}
+
+      <input type="submit" value="Register" />
+    </form>
+    </>
+  );
 }
 
 export default LoginUser;

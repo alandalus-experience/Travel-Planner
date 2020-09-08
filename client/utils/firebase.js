@@ -17,10 +17,15 @@ export const registerUser = (email, password) => {
   .auth()
   .createUserWithEmailAndPassword(email, password)
   .catch(function(error) {
-    // Handle Errors here.
+    //TODO: Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    // ...
   });
+}
+
+export const loginUser = (email, password) => {
+  console.log("Logging in");
+  console.log("email :", email);
+  console.log("password :", password);
 }
 
