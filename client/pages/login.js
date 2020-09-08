@@ -35,8 +35,8 @@ function LoginUser() {
     <div className={styles['login-container']}>
       <div className={styles['login']}>
           <div className={styles['login-header']}>Welcome Back</div>
+          <p className={styles['form-helper-text']}>EASY SIGNIN</p>
           <div className={styles['third-party-signin']}>
-              <p className={styles['form-helper-text']}>EASY SIGNIN</p>
               <button onClick={SignInWithGoogle}>GOOGLE</button>
               <button onClick={() => console.log("facebook login not enabled yet")}>FACEBOOK</button>
           </div>
@@ -57,11 +57,11 @@ function LoginUser() {
             </form>
           </div>
           <p className={styles['footer-text']}>
-              Dont have an account? <a href='/register'><span className={styles['login-link']}>Register!</span></a>
+              Dont have an account? 
+              <a href='/register'><span className={styles['login-link']}>Register!</span></a>
           </p>
       </div>
   </div>
-
     </>
   );
 }

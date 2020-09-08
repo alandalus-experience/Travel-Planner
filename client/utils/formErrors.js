@@ -19,7 +19,6 @@ export const onError = (errors) => {
   }
   
   if (errors.Password2?.type === "validate") {
-    console.log(errors.password2);
     errors.Password2.message = "Passwords don't match"
   }
   
