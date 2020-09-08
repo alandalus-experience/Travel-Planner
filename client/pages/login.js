@@ -7,22 +7,15 @@ import { useForm } from 'react-hook-form';
 
 // Components
 import MainNav from '../components/Navigation/MainNav';
+import UserForm from '../components/User/UserForm';
 
 // Other Imports
-import { loginUser, SignInWithGoogle } from '../utils/firebase';
-import { formValidators } from '../utils/formValidators';
-import { onError } from '../utils/formErrors';
+import { SignInWithGoogle } from '../utils/firebase';
 
 // Styles
 import styles from "../styles/Login.module.scss";
 
 function LoginUser() {
-
-  const { register, handleSubmit, errors } = useForm();
-
-  const onSubmit = (data) => {
-    loginUser(data.Email, data.Password)
-  }
 
   return (
     <>
@@ -42,23 +35,11 @@ function LoginUser() {
           </div>
           <p className={styles['form-helper-text']}>- OR USING EMAIL -</p>
           <div className={styles['email-sign-in']}>
-            <form onSubmit={handleSubmit(onSubmit, onError)}>
-              <div>
-                <input type="text" placeholder="Email" name="Email" ref={register(formValidators.input.email)} />
-                {errors.Email ? <span>{errors.Email.message}</span> : null}
-              </div>
-              <div>
-                <input type="password" placeholder="Password" name="Password" ref={register(formValidators.input.password)} />
-                {errors.Password ? <span>{errors.Password.message}</span> : null}
-              </div>
-              <div>
-                <input type="submit" value="Sign In" />
-              </div>
-            </form>
+          <UserForm />
           </div>
           <p className={styles['footer-text']}>
-              Dont have an account? 
-              <a href='/register'><span className={styles['login-link']}>Register!</span></a>
+              Don't have an account? 
+              <a href='/register'><span className={styles['login-link']}> Register!</span></a>
           </p>
       </div>
   </div>
