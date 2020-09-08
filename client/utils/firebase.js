@@ -16,6 +16,7 @@ export const registerUser = (email, password) => {
   firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)
+  .then(res => console.log(res.user))
   .catch(function(error) {
     //TODO: Handle Errors here.
     var errorCode = error.code;
@@ -24,8 +25,16 @@ export const registerUser = (email, password) => {
 }
 
 export const loginUser = (email, password) => {
-  console.log("Logging in");
-  console.log("email :", email);
-  console.log("password :", password);
-}
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(res => console.log(res.user))
+    .catch(err => {
+      console.log(err);
+    });
+};
 
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters( {'prompt': 'select_account'} );
+
+export const SignInWithGoogle = () => firebase.auth().signInWithPopup(googleProvider);
