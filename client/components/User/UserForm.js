@@ -57,7 +57,7 @@ const UersForm = (props) => {
         </form>
         <p className={styles['footer-text']}>
         {router.pathname === "/register" ? "Already have an account?" : "Don't have an account?"}
-          <a href='/login'><span className={styles['login-link']}> {router.pathname === "/register" ? "Register" : "Login"}</span></a>
+          <a href={router.pathname === "/register" ? "/login" : "/register"}><span className={styles['login-link']}> {router.pathname === "/register" ? "Login" : "Register"}</span></a>
         </p>
       </div>
     </div>
