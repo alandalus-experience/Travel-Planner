@@ -4,23 +4,27 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router'
 
 // Other Imports
-import { registerUser, loginUser } from '../../utils/firebase';
 import { formValidators } from '../../utils/formValidators';
 import { onError } from '../../utils/formErrors';
 
+// Redux Imports
+import { useDispatch } from 'react-redux';
+import { emailSignup, emailLogin } from '../../redux/actions/userActions';
+
 const UersForm = (props) => {
 
-  const router = useRouter()
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const { register, handleSubmit, errors, watch } = useForm();
 
   const onSubmit = (data) => {
     if(router.pathname === "/register") {
       console.log("register");
-      registerUser(data.Email, data.Password)
+      dispatch(emailSignup(data.Email, data.Password));
     } else {
       console.log("login");
-      loginUser(data.Email, data.Password)
+      dispatch(emailLogin(data.Email, data.Password));
     }
   }
 
