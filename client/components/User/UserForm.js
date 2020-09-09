@@ -15,7 +15,7 @@ import styles from "../../styles/Login.module.scss";
 
 // Redux Imports
 import { useDispatch } from 'react-redux';
-import { emailSignup, emailLogin } from '../../redux/actions/userActions';
+import { emailSignup, emailLogin, googleLogin } from '../../redux/actions/userActions';
 
 const UersForm = (props) => {
 
@@ -40,7 +40,7 @@ const UersForm = (props) => {
         <div className={styles['login-header']}>{router.pathname === "/register" ? "Register" : "Welcome Back"}</div>
         <p className={styles['form-helper-text']}>EASY SIGNIN</p>
         <div className={styles['third-party-signin']}>
-          <button onClick={SignInWithGoogle}>GOOGLE</button>
+          <button onClick={() => dispatch(googleLogin())}>GOOGLE</button>
           <button onClick={() => console.log("facebook login not enabled yet")}>FACEBOOK</button>
         </div>
         <p className={styles['form-helper-text']}>- OR USING EMAIL -</p>
