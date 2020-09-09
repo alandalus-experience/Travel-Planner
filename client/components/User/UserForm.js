@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 // Other Imports
 import { registerUser, loginUser } from '../../utils/firebase';
 import { formValidators } from '../../utils/formValidators';
-import { onError } from '../../utils/formErrors';
+import { onError, authErrors } from '../../utils/formErrors';
 
 // Other Imports
 import { SignInWithGoogle } from '../../utils/firebase';
@@ -43,14 +43,14 @@ const UersForm = (props) => {
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           <div>
             <input type="text" placeholder="Email" name="Email" ref={register(formValidators.input.email)} />
-            {errors.Email ? <span>{errors.Email.message}</span> : null}
+            {errors.Email ? <p className={styles["user-error"]}>{errors.Email.message}</p> : null}
           </div>
           <div>
             <input type="password" placeholder="Password" name="Password" ref={register(formValidators.input.password)} />
-            {errors.Password ? <span>{errors.Password.message}</span> : null}
+            {errors.Password ? <p className={styles["user-error"]}>{errors.Password.message}</p> : null}
           </div>
             { router.pathname === "/register" ? <input type="password" placeholder="Confirm Password" name="Password2" ref={register({validate: (value) => formValidators.input.passwordConfirm(value, watch)})} /> : null }
-            {errors.Password2 ? <span>{errors.Password2.message}</span> : null}
+            {errors.Password2 ? <p className={styles["user-error"]}>{errors.Password2.message}</p> : null}
           <div>
             <input type="submit" value={ router.pathname === "/register" ? "Register" : "Login"} />
           </div>
