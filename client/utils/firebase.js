@@ -34,6 +34,10 @@ export const loginUser = (email, password) => {
     });
 };
 
+export const logoutUser = () => {
+  // to-do
+}
+
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters( {'prompt': 'select_account'} );
 
