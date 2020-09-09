@@ -9,14 +9,16 @@ import { useForm } from 'react-hook-form';
 import MainNav from '../components/Navigation/MainNav';
 import UserForm from '../components/User/UserForm';
 
-// Other Imports
-import { SignInWithGoogle } from '../utils/firebase';
+// Redux Imports
+import { useDispatch } from 'react-redux';
+import { googleLogin } from '../redux/actions/userActions';
 
 // Styles
 import styles from "../styles/Login.module.scss";
 
-function LoginUser() {
 
+function LoginUser() {
+  const dispatch = useDispatch();
   return (
     <>
     <Head>
@@ -30,7 +32,7 @@ function LoginUser() {
           <div className={styles['login-header']}>Welcome Back</div>
           <p className={styles['form-helper-text']}>EASY SIGNIN</p>
           <div className={styles['third-party-signin']}>
-              <button onClick={SignInWithGoogle}>GOOGLE</button>
+              <button onClick={() => dispatch(googleLogin())}>GOOGLE</button>
               <button onClick={() => console.log("facebook login not enabled yet")}>FACEBOOK</button>
           </div>
           <p className={styles['form-helper-text']}>- OR USING EMAIL -</p>
@@ -38,7 +40,7 @@ function LoginUser() {
           <UserForm />
           </div>
           <p className={styles['footer-text']}>
-              Don't have an account? 
+              Don't have an account?
               <a href='/register'><span className={styles['login-link']}> Register!</span></a>
           </p>
       </div>

@@ -8,15 +8,16 @@ import React from 'react';
 import MainNav from '../components/Navigation/MainNav';
 import UserForm from '../components/User/UserForm';
 
-// Other Imports
-import { SignInWithGoogle } from '../utils/firebase';
+// Redux Imports
+import { useDispatch } from 'react-redux';
+import { googleLogin } from '../redux/actions/userActions';
 
 // Styles
 import styles from "../styles/Login.module.scss";
 
 
 function RegisterUser() {
-
+  const dispatch = useDispatch();
   return (
     <>
     <Head>
@@ -30,7 +31,7 @@ function RegisterUser() {
         <div className={styles['login-header']}>Register</div>
         <p className={styles['form-helper-text']}>EASY SIGNIN</p>
         <div className={styles['third-party-signin']}>
-          <button onClick={SignInWithGoogle}>GOOGLE</button>
+          <button onClick={() => dispatch(googleLogin())}>GOOGLE</button>
           <button onClick={() => console.log("facebook login not enabled yet")}>FACEBOOK</button>
         </div>
         <p className={styles['form-helper-text']}>- OR USING EMAIL -</p>
