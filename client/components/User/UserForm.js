@@ -44,14 +44,14 @@ const UserForm = (props) => {
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           <div>
             <input type="text" placeholder="Email" name="Email" ref={register(formValidators.input.email)} />
-            {errors.Email ? <p className={styles["user-error"]}>{errors.Email.message}</p> : null}
+            {errors?.Email?.message && <p className={styles["user-error"]}>{errors.Email.message}</p>}
           </div>
           <div>
             <input type="password" placeholder="Password" name="Password" ref={register(formValidators.input.password)} />
-            {errors.Password ? <p className={styles["user-error"]}>{errors.Password.message}</p> : null}
+            {errors?.Password?.message && <p className={styles["user-error"]}>{errors.Password.message}</p>}
           </div>
             { router.pathname === "/user/register" ? <input type="password" placeholder="Confirm Password" name="Password2" ref={register({validate: (value) => formValidators.input.passwordConfirm(value, watch)})} /> : null }
-            {errors.Password2 ? <p className={styles["user-error"]}>{errors.Password2.message}</p> : null}
+            {errors?.Password2?.message && <p className={styles["user-error"]}>{errors.Password2.message}</p>}
           <div>
             <input type="submit" value={ router.pathname === "/user/register" ? "Register" : "Login"} />
           </div>
