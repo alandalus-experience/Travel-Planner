@@ -5,14 +5,14 @@ import Head from 'next/head'
 import React from 'react';
 
 // Components
-import MainNav from '../components/Navigation/MainNav';
-import UserForm from '../components/User/UserForm';
+import MainNav from '../../components/Navigation/MainNav';
+import UserForm from '../../components/User/UserForm';
 
-function LoginUser() {
+function RegisterUser() {
   return (
     <>
       <Head>
-        <title>Travel Planner - Login</title>
+        <title>Travel Planner - Register</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <MainNav />
@@ -21,4 +21,4 @@ function LoginUser() {
   );
 }
 
-export default LoginUser;
+export default RegisterUser;

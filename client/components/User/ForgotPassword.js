@@ -1,6 +1,6 @@
 import React from "react";
 
-const RecoverPassword = () => (
+const ForgotPassword = () => (
 
 	<div
 		className='recover-password'
@@ -85,7 +85,7 @@ const RecoverPassword = () => (
 						textAlign: "center",
 						letterSpacing: "2px",
 					}}>
-					Your email or username
+					Your email
 				</span>
 			</div>
 			<div
@@ -136,4 +136,4 @@ const RecoverPassword = () => (
 	</div>
 );
 
-export default RecoverPassword;
+export default ForgotPassword;

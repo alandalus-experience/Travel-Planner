@@ -16,10 +16,10 @@ function MainMenu () {
         </Link>
       </div>
       <div>
-        <Link href="/register">
+        <Link href="/user/register">
           <a>Register</a>
         </Link>
-        <Link href="/login">
+        <Link href="/user/login">
           <a>Login</a>
         </Link>
       </div>

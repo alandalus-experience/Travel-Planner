@@ -41,10 +41,17 @@
 }
 
 .footer-text {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 200;
-    opacity: 50%;
+    opacity: 70%;
     padding-top: 15px;
+}
+
+.footer-text-forgot {
+    font-size: 11px;
+    font-weight: 200;
+    opacity: 70%;
+    margin-top: 0;
 }
 
 .login-link {
@@ -53,11 +60,12 @@
 }
 
 .user-error {
+    position: fixed;
     font-size: 12px;
     text-align: center;
     color: rgb(245, 245, 245);
-    margin: 5px 0 20px;
-    padding: 0;
+    margin: 0 0 20px;
+    padding: 2px 6px;
     background-color: salmon;
     border: 0 solid withe;
     border-radius: 4px;

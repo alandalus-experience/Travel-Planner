@@ -12,7 +12,7 @@ export const onError = (errors) => {
   
   if (errors.Password) {
     if (errors.Password?.type === "required") {
-      errors.Password.message = "Password can\'t be empty";
+      errors.Password.message = "Password can't be empty";
       return
     } else if (errors.Password?.type === "minLength") {
       errors.Password.message = "Password is too short";
