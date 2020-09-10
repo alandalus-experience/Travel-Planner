@@ -10,7 +10,7 @@ import {
     EMAIL_SIGNUP,
     EMAIL_LOGIN
 } from "../constants/userConstants";
-import { loginUser, registerUser, SignInWithGoogle } from '../../utils/firebase';
+import { loginUser, registerUser, SignInWithGoogle, sendPasswordResetLink } from '../../utils/firebase';
 
 export const updateEmail = (email) => {
     return {
@@ -147,3 +147,7 @@ export const emailSignup = (email, password) => dispatch => {
     registerUser(email, password)
     dispatch(signupSuccess())
 };
+
+export const sendResetPassword = (email) => dispatch => {
+    sendPasswordResetLink(email)
+}
