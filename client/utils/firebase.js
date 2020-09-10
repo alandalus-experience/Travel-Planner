@@ -35,8 +35,31 @@ export const loginUser = (email, password) => {
 };
 
 export const logoutUser = () => {
-  // to-do
-}
+  firebase
+    .auth()
+    .signOut()
+    .then(() => console.log("signed out"))
+    .catch(err => console.log(err));
+};
+
+export const sendPasswordResetLink = (email) => {
+  firebase
+    .auth()
+    .sendPasswordResetEmail(email)
+    .then(() => console.log("email sent"))
+    .catch(err => {
+      console.log(err);
+    })
+};
+
+export const sendEmailVerificationLink = (email) => {
+  firebase
+    .auth()
+    .currentUser
+    .sendEmailVerification()
+    .then(() => console.log("verification mail sent"))
+    .catch(err => console.log(err));
+};
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters( {'prompt': 'select_account'} );
