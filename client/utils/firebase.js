@@ -2,7 +2,6 @@
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
 import {firebaseConfig} from "../config/firebaseConfig";
-import Router from 'next/router'
 
 // Add the Firebase services that you want to use
 import "firebase/auth";
@@ -13,11 +12,15 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
+//////////////////////////////
+// Email/Password functions //
+//////////////////////////////
+
 export const registerUser = (email, password, verifyEmail = true) => {
   firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)
-  .then((res) => {})
+  .then(res => console.log(res))
   .then(() => {
     if(verifyEmail) {
       sendEmailVerificationLink()
@@ -25,8 +28,10 @@ export const registerUser = (email, password, verifyEmail = true) => {
   })
   .catch(function(error) {
     //TODO: Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log('Error code: ', errorCode);
+    console.log('Error message: ', errorMessage);
   });
 }
 
@@ -34,13 +39,22 @@ export const loginUser = (email, password) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(firebase.auth().currentUser.getIdToken(true)
-    .then(function(idToken) {
+    .then(
+      firebase
+        .auth()
+        .currentUser
+        .getIdToken(true)
+    .then(
+      function(idToken) {
       //TODO: Send idToken to the back-end
       console.log(idToken);
     }))
-    .catch(function(error) {
-      console.log(error);
+    .catch(
+      function(error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('Error code: ', errorCode);
+        console.log('Error message: ', errorMessage);
     });
 };
 
@@ -49,8 +63,18 @@ export const logoutUser = () => {
     .auth()
     .signOut()
     .then(() => console.log("signed out"))
-    .catch(err => console.log(err));
+    .catch(error => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('Error code: ', errorCode);
+      console.log('Error message: ', errorMessage);
+    });
 };
+
+
+/////////////////////////////
+// Email sending Functions //
+/////////////////////////////
 
 export const sendPasswordResetLink = (email) => {
   firebase
@@ -58,7 +82,10 @@ export const sendPasswordResetLink = (email) => {
     .sendPasswordResetEmail(email)
     .then(() => console.log("email sent"))
     .catch(err => {
-      console.log(err);
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('Error code: ', errorCode);
+      console.log('Error message: ', errorMessage);
     })
 };
 
@@ -68,10 +95,23 @@ export const sendEmailVerificationLink = () => {
     .currentUser
     .sendEmailVerification()
     .then(() => console.log("verification mail sent"))
-    .catch(err => console.log(err));
+    .catch(err => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('Error code: ', errorCode);
+      console.log('Error message: ', errorMessage);
+    });
 };
+
+////////////////////////////////////
+// Third Party provider functions //
+////////////////////////////////////
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters( {'prompt': 'select_account'} );
 
-export const SignInWithGoogle = () => firebase.auth().signInWithPopup(googleProvider);
+export const SignInWithGoogle = () => {
+  firebase
+    .auth()
+    .signInWithPopup(googleProvider);
+}

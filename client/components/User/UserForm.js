@@ -3,7 +3,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router'
 
-// Other Imports
+// Form Imports
 import { formValidators } from '../../utils/formValidators';
 import { onError, authErrors } from '../../utils/formErrors';
 
@@ -19,8 +19,10 @@ const UserForm = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  // React-hook-form functions
   const { register, handleSubmit, errors, watch } = useForm();
 
+  // Handles form submission
   const onSubmit = async (data) => {
     if(router.pathname === "/user/register") {
       console.log("register");

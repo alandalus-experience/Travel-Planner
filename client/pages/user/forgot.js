@@ -8,8 +8,6 @@ import React from 'react';
 import MainNav from '../../components/Navigation/MainNav';
 import ForgotPassword from '../../components/User/ForgotPassword';
 
-
-
 function Forgot_Password() {
   return (
     <>

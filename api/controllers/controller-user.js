@@ -3,8 +3,6 @@ const User = require('../models/model-user')
 exports.createUser = async (req, res) => {
 
   //TODO: Implement better error handling
-  //TODO: Email validation will be handled on the front-end
-
 
   // Save req.body into request variable so less typing
   const request = req.body
