@@ -21,10 +21,12 @@ const UserForm = (props) => {
 
   const { register, handleSubmit, errors, watch } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if(router.pathname === "/user/register") {
       console.log("register");
-      dispatch(emailSignup(data.Email, data.Password));
+      //Remove the third argument or change it to true if we want to send the verification email
+      // I added a default true as the third argument
+      dispatch(emailSignup(data.Email, data.Password, false));
     } else {
       console.log("login");
       dispatch(emailLogin(data.Email, data.Password));

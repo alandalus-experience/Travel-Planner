@@ -2,6 +2,7 @@
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
 import {firebaseConfig} from "../config/firebaseConfig";
+import Router from 'next/router'
 
 // Add the Firebase services that you want to use
 import "firebase/auth";
@@ -12,11 +13,16 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-export const registerUser = (email, password) => {
+export const registerUser = (email, password, verifyEmail = true) => {
   firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)
-  .then(res => console.log(res.user))
+  .then((res) => {})
+  .then(() => {
+    if(verifyEmail) {
+      sendEmailVerificationLink()
+    }
+  })
   .catch(function(error) {
     //TODO: Handle Errors here.
     var errorCode = error.code;
@@ -28,9 +34,13 @@ export const loginUser = (email, password) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(res => console.log(res.user))
-    .catch(err => {
-      console.log(err);
+    .then(firebase.auth().currentUser.getIdToken(true)
+    .then(function(idToken) {
+      //TODO: Send idToken to the back-end
+      console.log(idToken);
+    }))
+    .catch(function(error) {
+      console.log(error);
     });
 };
 
@@ -52,7 +62,7 @@ export const sendPasswordResetLink = (email) => {
     })
 };
 
-export const sendEmailVerificationLink = (email) => {
+export const sendEmailVerificationLink = () => {
   firebase
     .auth()
     .currentUser

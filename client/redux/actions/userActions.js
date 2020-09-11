@@ -142,9 +142,9 @@ export const googleLogin = () => async dispatch => {
     }
 };
 
-export const emailSignup = (email, password) => dispatch => {
+export const emailSignup = (email, password, verifyEmail) => dispatch => {
     dispatch(signupStart())
-    registerUser(email, password)
+    registerUser(email, password, verifyEmail)
     dispatch(signupSuccess())
 };
 
