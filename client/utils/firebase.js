@@ -1,3 +1,5 @@
+// Axios
+import API from "./api";
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
@@ -20,18 +22,23 @@ export const registerUser = (email, password, verifyEmail = true) => {
   firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)
-  .then(res => console.log(res))
+  .then(res => {
+    console.log(res);
+    API.post(`/users/register`, {res})
+  })
   .then(() => {
     if(verifyEmail) {
       sendEmailVerificationLink()
     }
   })
-  .catch(function(error) {
-    //TODO: Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log('Error code: ', errorCode);
-    console.log('Error message: ', errorMessage);
+  .catch((error) => {
+    if (error.response) {
+        console.log(error.response.data);
+    } else if (error.request) {
+        console.log(error.request);
+    } else {
+        console.log('Error', error.message);
+    }
   });
 }
 
@@ -40,8 +47,7 @@ export const loginUser = (email, password) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(res => console.log(res.user))
-    .catch(
-      function(error) {
+    .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log('Error code: ', errorCode);
@@ -72,7 +78,7 @@ export const sendPasswordResetLink = (email) => {
     .auth()
     .sendPasswordResetEmail(email)
     .then(() => console.log("email sent"))
-    .catch(err => {
+    .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log('Error code: ', errorCode);
@@ -86,7 +92,7 @@ export const sendEmailVerificationLink = () => {
     .currentUser
     .sendEmailVerification()
     .then(() => console.log("verification mail sent"))
-    .catch(err => {
+    .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log('Error code: ', errorCode);
@@ -104,5 +110,15 @@ googleProvider.setCustomParameters( {'prompt': 'select_account'} );
 export const SignInWithGoogle = () => {
   firebase
     .auth()
-    .signInWithPopup(googleProvider);
+    .signInWithPopup(googleProvider)
+    .then(res => API.post(`/users/register`, {res}))
+    .catch((error) => {
+      if (error.response) {
+          console.log(error.response.data);
+      } else if (error.request) {
+          console.log(error.request);
+      } else {
+          console.log('Error', error.message);
+      }
+    });
 }
