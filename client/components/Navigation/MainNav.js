@@ -2,12 +2,16 @@
 import Link from 'next/link'
 
 // React modules
-import React from 'react'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../redux/actions/userActions';
 
 //Scoped stylings
 import styles from '../../styles/MainNav.module.scss'
 
-function MainMenu () {
+const MainMenu = () => {
+  const user = useSelector(state => state.user.user);
+  const dispatch = useDispatch();
   return (
     <ul className={styles["nav-container"]}>
       <div>
@@ -16,15 +20,23 @@ function MainMenu () {
         </Link>
       </div>
       <div>
-        <Link href="/user/register">
-          <a>Register</a>
-        </Link>
-        <Link href="/user/login">
-          <a>Login</a>
-        </Link>
+        {
+          user ? (
+            <span
+              onClick={() => dispatch(logoutUser())}
+              style={{"cursor": "pointer"}}
+            >
+              Logout
+            </span>
+          ) : (
+            <Link href="/user/login">
+              <a>Login</a>
+            </Link>
+          )
+        }
       </div>
     </ul>
   )
 }
 
-export default MainMenu
+export default MainMenu;

@@ -1,7 +1,9 @@
-import Head from 'next/head'
-import React from 'react'
+import Head from 'next/head';
+import React from 'react';
 
-import MainNav from '../components/Navigation/MainNav'
+
+import MainNav from '../components/Navigation/MainNav';
+
 
 // Left it here for future use
 // import styles from '../styles/Home.module.scss'
@@ -9,7 +11,8 @@ import MainNav from '../components/Navigation/MainNav'
 //Back-end routing
 // import API from './api/api';
 
-function Home() {
+const Home = () => {
+  
   return (
     <>
       <Head>
@@ -22,5 +25,5 @@ function Home() {
   )
 }
 
-export default Home
+export default Home;
 

@@ -49,7 +49,7 @@ export const loginUser = (email, password) => {
     });
 };
 
-export const logoutUser = () => {
+export const signoutUser = () => {
   firebase
     .auth()
     .signOut()
@@ -102,7 +102,7 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters( {'prompt': 'select_account'} );
 
 export const SignInWithGoogle = () => {
-  firebase
-    .auth()
-    .signInWithPopup(googleProvider);
-}
+  return firebase.auth().signInWithPopup(googleProvider);
+};
+
+export default firebase;

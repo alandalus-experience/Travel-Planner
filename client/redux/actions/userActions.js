@@ -10,7 +10,7 @@ import {
     EMAIL_SIGNUP,
     EMAIL_LOGIN
 } from "../constants/userConstants";
-import { loginUser, registerUser, SignInWithGoogle, sendPasswordResetLink } from '../../utils/firebase';
+import { loginUser, registerUser,signoutUser, SignInWithGoogle, sendPasswordResetLink } from '../../utils/firebase';
 
 export const updateEmail = (email) => {
     return {
@@ -120,7 +120,7 @@ export const logoutFailure = (error) => {
 
 export const logoutUser = () => async dispatch => {
     try {
-        // to-do: Add logout function in firebase util
+        dispatch(signoutUser())
         dispatch(logoutSuccess());
     } catch (e) {
         dispatch(logoutFailure(e))
@@ -135,8 +135,13 @@ export const emailLogin = (email,password) => dispatch => {
 export const googleLogin = () => async dispatch => {
     dispatch(loginStart())
     try {
-        SignInWithGoogle();
-        dispatch(loginSuccess(res.user));
+        const res = await SignInWithGoogle();
+        dispatch(loginSuccess({
+            uid: res.user.uid,
+            email: res.user.email,
+            emailVerified: res.user.emailVerified,
+            name: res.user.displayName
+        }));
     } catch (e) {
         dispatch(loginFailure(e))
     }

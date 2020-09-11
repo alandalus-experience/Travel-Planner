@@ -1,14 +1,26 @@
 // NextJS modules
-import Head from 'next/head'
+import Head from 'next/head';
+import Router from 'next/router';
 
 // React modules
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 // Components
 import MainNav from '../../components/Navigation/MainNav';
 import UserForm from '../../components/User/UserForm';
 
-function LoginUser() {
+const LoginUser = () => {
+  const user = useSelector(state => state.user.user);
+  const loading = useSelector(state => state.user.loading);
+  useEffect(() => {
+    if ( user ) {
+      Router.push("/")
+    }
+  })
+  if (loading) {
+    return <></>
+  }
   return (
     <>
       <Head>
