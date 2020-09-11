@@ -23,13 +23,6 @@ const userSchema = new mongoose.Schema({
     unique: true,
     minlength: [6, 'Email must be at least 6 charcters long'],
   },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: [8, 'Password must be at least 8 charcters long'],
-    maxlength: [100, 'Password cannot exceed 100 characters'],
-  },
   // Timestamp
   createdAt: {
     type: Date,
@@ -39,16 +32,6 @@ const userSchema = new mongoose.Schema({
   // For later use, if we go with token route
   lastLogin: {
     type: String,
-  },
-  // For later use, when user requests password recovery this will be the token to match
-  resetPasswordToken: {
-    type: String,
-    default: 'a',
-  },
-  // For later use, limit time to use password recovery
-  resetPasswordExpires: {
-    type: Date,
-    default: Date.now(),
   },
 })
 

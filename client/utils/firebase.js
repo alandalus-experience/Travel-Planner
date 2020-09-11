@@ -39,16 +39,7 @@ export const loginUser = (email, password) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(
-      firebase
-        .auth()
-        .currentUser
-        .getIdToken(true)
-    .then(
-      function(idToken) {
-      //TODO: Send idToken to the back-end
-      console.log(idToken);
-    }))
+    .then(res => console.log(res.user))
     .catch(
       function(error) {
         const errorCode = error.code;
