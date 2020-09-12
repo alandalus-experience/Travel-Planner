@@ -11,8 +11,8 @@ function MainMenu () {
   return (
     <ul className={styles["nav-container"]}>
       <div>
-        <Link href="/">
-          <a>Home</a>
+        <Link href="/dashboard">
+          <a>Dashboard</a>
         </Link>
       </div>
       <div>

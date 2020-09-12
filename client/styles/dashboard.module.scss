@@ -1,0 +1,74 @@
+/* Max-Width: 425px */
+
+/* 88vh allows to remove scroll on the page */
+.dashboard-container {
+    height: 88vh;
+    width: 100vw;
+    background: url('https://images.unsplash.com/photo-1599423301013-effd6158d36a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Three Icons Container */
+    .icons-items {
+        position: relative;
+        top: 10vh;
+        height: 15%;
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+
+        /* Icon and Description Container */
+        .icons-item {
+            height: 100%;
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .icon-container {
+                cursor: pointer;
+                height: 70%;
+                width: 80%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid black;
+                border-radius: 50%;
+            }
+
+            /* React Icons */
+            .icon-container * {
+                height: 60%;
+                width: 60%;
+                transition: all 0.5s ease;
+
+                /* Icon rolls on its axis */
+                &:hover {
+                    animation: roll;
+                    transform-origin: center center;
+                    transform: rotate(1turn);
+                }
+
+            }
+
+
+            .icon-title {
+                height: 30%;
+                width: 100%;
+                text-align: center;
+                font-style: italic;
+                font-size: 16px;
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+            
+            
+        }
+
+    }
+}
