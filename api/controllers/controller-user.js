@@ -46,22 +46,30 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
 
   const request = req.body;
-  console.log(request)
+  // console.log(request)
 
   try {
     const query = {
       email: request.email,
+      emailVerified : request.emailVerified,
     }
 
     const isExistingUser = await User.findOne({email: query.email})
 
     if (isExistingUser) {
+      // Updates the DB when email gets verified.
+      if (isExistingUser.emailVerified !== query.emailVerified) {
+        await User.findOneAndUpdate(
+          { email: query.email },
+          { emailVerified: query.emailVerified}, 
+          {new: true});
+          console.log('Email is verified now!');
+      }
       res.status(200).json({
         status: 200,
         message: 'You are logged in!!!'
       })
     }
-
   } catch (error) {
     res.status(500).json({
       status: 500,
