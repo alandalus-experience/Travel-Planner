@@ -1,10 +1,8 @@
 const User = require('../models/model-user')
-const jwt = require('jsonwebtoken')
-
 
 exports.registerUser = async (req, res) => {
 
-  const request = req.body.res.user;
+  const request = req.body;
   // console.log(request)
 
   try {
@@ -32,11 +30,38 @@ exports.registerUser = async (req, res) => {
         }
       })
     } else {
-        return res.status(500).json({
-          status: 500,
-          message: 'User already exsists',
+        return res.status(409).json({
+          status: 409,
+          message: 'The email address is already in use by another account',
         })
     }
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: 'Something went wrong',
+    })
+  }
+}
+
+exports.loginUser = async (req, res) => {
+
+  const request = req.body;
+  console.log(request)
+
+  try {
+    const query = {
+      email: request.email,
+    }
+
+    const isExistingUser = await User.findOne({email: query.email})
+
+    if (isExistingUser) {
+      res.status(200).json({
+        status: 200,
+        message: 'You are logged in!!!'
+      })
+    }
+
   } catch (error) {
     res.status(500).json({
       status: 500,
