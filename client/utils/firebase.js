@@ -81,6 +81,15 @@ export const sendEmailVerificationLink = async () => {
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters( {'prompt': 'select_account'} );
 
+export const SignInWithGoogle = async () => {
+  try {
+    const user = await firebase.auth().signInWithPopup(googleProvider)
+    await API.post(`/users/register`, user.user)
+  } catch (error) {
+    handleError(error)
+  }
+}
+
 
 const facebookProvider = new firebase.auth.FacebookAuthProvider();
 facebookProvider.setCustomParameters({'display': 'popup'});
@@ -92,15 +101,7 @@ export const SignInWithFacebook = async () => {
   } catch (error) {
     handleError(error)
   }
-export const SignInWithGoogle = async () => {
-  try {
-    const user = await firebase.auth().signInWithPopup(googleProvider)
-    await API.post(`/users/register`, user.user)
-  } catch (error) {
-    handleError(error)
-  }
 }
-
 ///////////////////
 // Error Handler //
 ///////////////////
@@ -112,3 +113,5 @@ const handleError = (error) => {
   console.log('Error code: ', errorCode);
   console.log('Error message: ', errorMessage);
 }
+
+export default firebase;

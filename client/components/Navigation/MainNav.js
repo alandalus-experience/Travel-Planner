@@ -3,38 +3,35 @@ import Link from 'next/link'
 
 // React modules
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../redux/actions/userActions';
+import { useSelector } from 'react-redux';
+
+// Components
+import LeftMainNav_LoggedIn from './LoggedIn/LeftMainNav';
+import RightMainNav_LoggedIn from './LoggedIn/RightMainNav';
+import LeftMainNav_LoggedOut from './LoggedOut/LeftMainNav';
+import RightMainNav_LoggedOut from './LoggedOut/RightMainNav';
+
 
 //Scoped stylings
 import styles from '../../styles/MainNav.module.scss'
 
 const MainMenu = () => {
   const user = useSelector(state => state.user.user);
-  const dispatch = useDispatch();
   return (
     <ul className={styles["nav-container"]}>
-      <div>
-        <Link href="/dashboard">
-          <a>Dashboard</a>
-        </Link>
-      </div>
-      <div>
-        {
-          user ? (
-            <span
-              onClick={() => dispatch(logoutUser())}
-              style={{"cursor": "pointer"}}
-            >
-              Logout
-            </span>
-          ) : (
-            <Link href="/user/login">
-              <a>Login</a>
-            </Link>
-          )
-        }
-      </div>
+      { user ? (
+      // If user is logged in
+      <>
+        <LeftMainNav_LoggedIn />
+        <RightMainNav_LoggedIn />
+      </>
+      ) : (
+        // If user is logged out
+      <>
+        <LeftMainNav_LoggedOut />
+        <RightMainNav_LoggedOut />
+      </>
+      )}
     </ul>
   )
 }

@@ -150,7 +150,7 @@ export const googleLogin = () => async dispatch => {
 export const facebookLogin = () => async dispatch => {
     dispatch(loginStart())
     try {
-        SignInWithFacebook();
+       const res = await SignInWithFacebook();
         dispatch(loginSuccess({       
             uid: res.user.uid,
             email: res.user.email,
