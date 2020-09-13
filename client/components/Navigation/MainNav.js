@@ -16,7 +16,7 @@ import RightMainNav_LoggedOut from './LoggedOut/RightMainNav';
 import styles from '../../styles/MainNav.module.scss'
 
 const MainMenu = () => {
-  const user = useSelector(state => state.user.user);
+  const user = useSelector(state => state.user?.user);
   return (
     <ul className={styles["nav-container"]}>
       { user ? (

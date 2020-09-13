@@ -11,7 +11,7 @@ import MainNav from '../../components/Navigation/MainNav';
 import UserForm from '../../components/User/UserForm';
 
 const RegisterUser = () => {
-  const user = useSelector(state => state.user.user);
+  const user = useSelector(state => state.user?.user);
   useEffect(() => {
     if ( user ) {
       Router.push("/dashboard")

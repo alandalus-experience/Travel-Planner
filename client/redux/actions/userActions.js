@@ -151,7 +151,7 @@ export const facebookLogin = () => async dispatch => {
     dispatch(loginStart())
     try {
        const res = await SignInWithFacebook();
-        dispatch(loginSuccess({       
+        dispatch(loginSuccess({
             uid: res.user.uid,
             email: res.user.email,
             emailVerified: res.user.emailVerified,
