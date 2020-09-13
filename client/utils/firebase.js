@@ -43,7 +43,7 @@ export const loginUser = async (email, password) => {
   }
 };
 
-export const logoutUser = async () => {
+export const signoutUser = async () => {
   try {
     await firebase.auth().signOut()
     console.log("signed out")

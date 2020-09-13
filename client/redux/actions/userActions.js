@@ -10,7 +10,7 @@ import {
     EMAIL_SIGNUP,
     EMAIL_LOGIN
 } from "../constants/userConstants";
-import { loginUser, registerUser, SignInWithGoogle, SignInWithFacebook, sendPasswordResetLink } from '../../utils/firebase';
+import { loginUser, registerUser, SignInWithGoogle, SignInWithFacebook, sendPasswordResetLink, signoutUser } from '../../utils/firebase';
 
 export const updateEmail = (email) => {
     return {
@@ -120,7 +120,7 @@ export const logoutFailure = (error) => {
 
 export const logoutUser = () => async dispatch => {
     try {
-        dispatch(signoutUser())
+        await dispatch(signoutUser())
         dispatch(logoutSuccess());
     } catch (e) {
         dispatch(logoutFailure(e))

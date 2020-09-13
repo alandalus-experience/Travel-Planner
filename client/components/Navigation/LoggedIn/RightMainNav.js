@@ -13,8 +13,8 @@ const RightMainNav_LoggedIn = () => {
 
   return (
     <div>
-      <Link href="/" onClick={() => dispatch(logoutUser())} style={{"cursor": "pointer"}}>
-        <a>Logout</a>
+      <Link href="/">
+        <a onClick={() => dispatch(logoutUser())} style={{"cursor": "pointer"}}>Logout</a>
       </Link>
     </div>
   )
