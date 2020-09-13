@@ -117,7 +117,6 @@ export const SignInWithFacebook = async () => {
   }
 }
 
-
 ///////////////////
 // Error Handler //
 ///////////////////

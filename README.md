@@ -21,7 +21,8 @@ Users can create trips where they are able to add itineraries, make before you g
  1. Navigate into /client folder and run:
  ```$ npm install```
  2. Configure Firebase: [Firebase setup tutorial for this app](https://drive.google.com/file/d/1eLFITZLESiqVO3egpwlbJLJ3Rm5SWlb-/view?usp=sharing)
- 2. To start front-end server run this command in the terminal:
+ 3. Configure Facebook Login: [Facebook setup tutorial for this app](https://drive.google.com/file/d/1ZCldNsQVdgx5j7zMtvjZNs7CIDwRxCeh/view?usp=sharing)
+ 4. To start front-end server run this command in the terminal:
  ```$ npm run dev```
 
  ## Additional info
