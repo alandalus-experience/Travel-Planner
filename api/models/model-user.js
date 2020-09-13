@@ -42,21 +42,18 @@ const userSchema = new mongoose.Schema({
     default: false
   },
   providers: {
-    isPassword: {
+    password: {
       type: Boolean,
-      required: false,
-      default: false
+      default: false,
     },
-    isGoogle: {
+    google: {
       type: Boolean,
-      required: false,
-      default: false
+      default: false,
     },
-    isFacebook: {
+    facebook: {
       type: Boolean,
-      required: false,
-      default: false
-    }
+      default: false,
+    },
   }
 })
 
