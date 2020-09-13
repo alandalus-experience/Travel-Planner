@@ -14,7 +14,7 @@ const RegisterUser = () => {
   const user = useSelector(state => state.user.user);
   useEffect(() => {
     if ( user ) {
-      Router.push("/")
+      Router.push("/dashboard")
     }
   })
   return (

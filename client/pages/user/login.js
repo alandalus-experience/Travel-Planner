@@ -15,7 +15,7 @@ const LoginUser = () => {
   const loading = useSelector(state => state.user.loading);
   useEffect(() => {
     if ( user ) {
-      Router.push("/")
+      Router.push("/dashboard")
     }
   })
   if (loading) {
