@@ -1,39 +1,23 @@
+const { query } = require('express');
 const User = require('../models/model-user')
 
-exports.createUser = async (req, res) => {
+exports.registerUser = async (req, res) => {
 
-  //TODO: Implement better error handling
-
-  // Save req.body into request variable so less typing
-  const request = req.body
+  const request = req.body;
 
   try {
-    //Store request in query variable
     const query = {
-      email: request.email.toLowerCase(),
-      password: request.password
-    }
-
-    // Password check
-    if (query.password.length < 8 || query.password.length > 100) {
-      return res.status(500).json({
-        status: 500,
-        message: 'The password should be above 8 and below 100 characters',
-      })
-    }
-
-    // Check if passwords match
-    if (query.password !== request.password2) {
-      return res.status(500).json({
-        status: 500,
-        message: 'The passwords don\'t match',
-      })
+      user_id: request.uid,
+      email: request.email,
+      emailVerified : request.emailVerified,
+      createdAt: request.createdAt,
+      lastLogin: request.lastLoginAt,
+      providers: addProvider(request.providerData[0].providerId)
     }
     
-    // Save user
-    const isExistingUser = await User.findOne({email: query.email})
-
+    let isExistingUser = await User.findOne({email: query.email})
     // Check if user exists in the DB
+    
     if (!isExistingUser) {
       const user = new User(query)
 
@@ -42,21 +26,60 @@ exports.createUser = async (req, res) => {
       return res.status(201).json({
         status: 201,
         data: {
+          //FIXME: TO BE REMOVED AFTER TESTING!!!!
           user: user,
         }
       })
     } else {
-      return res.status(500).json({
-        status: 500,
-        message: 'User already exsists',
+      return res.status(409).json({
+        status: 409,
+        message: 'The email address is already in use by another account',
       })
     }
-  }
-  // Catch all error handler
-  catch (error) {
+  } catch (error) {
     res.status(500).json({
       status: 500,
       message: 'Something went wrong',
     })
   }
+}
+
+exports.loginUser = async (req, res) => {
+
+  const request = req.body;
+
+  try {
+    const query = {
+      email: request.email,
+      emailVerified : request.emailVerified,
+    }
+
+    const isExistingUser = await User.findOne({email: query.email})
+
+    if (isExistingUser) {
+      // Updates the DB when email gets verified.
+      if (isExistingUser.emailVerified !== query.emailVerified) {
+        await User.findOneAndUpdate(
+          { email: query.email },
+          { emailVerified: query.emailVerified}, 
+          {new: true});
+          console.log('Email is verified now!');
+      }
+      res.status(200).json({
+        status: 200,
+        message: 'You are logged in!!!'
+      })
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: 'Something went wrong',
+    })
+  }
+}
+
+const addProvider = (provider) => {
+  let providers = {}
+  providers[provider.split(".")[0]] = true
+  return providers
 }
