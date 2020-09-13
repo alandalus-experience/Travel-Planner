@@ -10,7 +10,7 @@ import {
     EMAIL_SIGNUP,
     EMAIL_LOGIN
 } from "../constants/userConstants";
-import { loginUser, registerUser,signoutUser, SignInWithGoogle, sendPasswordResetLink } from '../../utils/firebase';
+import { loginUser, registerUser, SignInWithGoogle, SignInWithFacebook, sendPasswordResetLink } from '../../utils/firebase';
 
 export const updateEmail = (email) => {
     return {
@@ -142,6 +142,16 @@ export const googleLogin = () => async dispatch => {
             emailVerified: res.user.emailVerified,
             name: res.user.displayName
         }));
+    } catch (e) {
+        dispatch(loginFailure(e))
+    }
+};
+
+export const facebookLogin = () => async dispatch => {
+    dispatch(loginStart())
+    try {
+        SignInWithFacebook();
+        dispatch(loginSuccess(res.user));
     } catch (e) {
         dispatch(loginFailure(e))
     }

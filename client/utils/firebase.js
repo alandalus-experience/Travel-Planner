@@ -105,4 +105,28 @@ export const SignInWithGoogle = () => {
   return firebase.auth().signInWithPopup(googleProvider);
 };
 
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
+facebookProvider.setCustomParameters({'display': 'popup'});
+
+export const SignInWithFacebook = async () => {
+  try {
+    const user = await firebase.auth().signInWithPopup(facebookProvider)
+    await API.post(`/users/register`, user.user)
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+
+///////////////////
+// Error Handler //
+///////////////////
+
+const handleError = (error) => {
+  console.log(error);
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  console.log('Error code: ', errorCode);
+  console.log('Error message: ', errorMessage);
+}
 export default firebase;

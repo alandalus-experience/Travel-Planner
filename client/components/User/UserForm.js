@@ -12,7 +12,7 @@ import styles from "../../styles/Login.module.scss";
 
 // Redux Imports
 import { useDispatch } from 'react-redux';
-import { emailSignup, emailLogin, googleLogin } from '../../redux/actions/userActions';
+import { emailSignup, emailLogin, googleLogin, facebookLogin } from '../../redux/actions/userActions';
 
 const UserForm = (props) => {
 
@@ -42,7 +42,7 @@ const UserForm = (props) => {
         <p className={styles['form-helper-text']}>EASY SIGNIN</p>
         <div className={styles['third-party-signin']}>
           <button onClick={() => dispatch(googleLogin())}>GOOGLE</button>
-          <button onClick={() => console.log("facebook login not enabled yet")}>FACEBOOK</button>
+          <button onClick={() => dispatch(facebookLogin())}>FACEBOOK</button>
         </div>
         <p className={styles['form-helper-text']}>- OR USING EMAIL -</p>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
