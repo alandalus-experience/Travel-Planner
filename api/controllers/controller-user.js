@@ -1,4 +1,3 @@
-const { query } = require('express');
 const User = require('../models/model-user')
 
 exports.registerUser = async (req, res) => {
