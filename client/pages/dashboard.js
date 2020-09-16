@@ -3,6 +3,8 @@ import Head from 'next/head';
 
 import React from 'react';
 
+import Router from 'next/router';
+
 import MainNav from '../components/Navigation/MainNav';
 
 /* React Icons */
@@ -29,7 +31,12 @@ const Dashboard = () => {
                     </div>
                     {/* My Trips */}
                     <div className={styles['icons-item']}>
-                        <div className={styles['icon-container']}><FaCompass /></div>
+                        <div 
+                            className={styles['icon-container']}
+                            onClick={() => Router.push("/trips/overview")}
+                        >
+                            <FaCompass />
+                        </div>
                         <span className={styles['icon-title']}>My Trips</span>
                     </div>
                     {/* Settings */}
