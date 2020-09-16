@@ -1,0 +1,74 @@
+/* Max-Width: 425px */
+
+.overview-card {
+    width: 100%;
+    height: 35vh;
+    margin-bottom: 10px;
+
+    .card-image {
+        height: 100%;
+        width: 100%;
+        margin-bottom: 10px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: opacity(0.5);
+        border: 1px solid black;
+
+        .card-label {
+            position: relative;
+            z-index: 999;
+            top: 50%;
+            left: 20%;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            height: 30%;
+            width: 60%;
+            box-shadow: inset 100px 100px rgba(0, 0, 0, 0.6);
+            border: 2px solid white;
+
+            /* Destination - Trip Title */
+            .label-header {
+                width: 100%;
+                height: 40%;
+                text-align: center;
+                color: white;
+                letter-spacing: 2px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+            /* Date: from - to */
+            .label-body {
+                width: 100%;
+                height: 40%;
+                text-align: center;
+                color: white;
+                font-size: 12px;
+                font-style: oblique;
+            }
+        }
+
+        /* Three dots - at the Top Right of the image */
+        .card-options {
+            cursor: pointer;
+            position: relative;
+            top: -70px;
+            left: 95%;
+            height: 10%;
+            width: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & * {
+                background-color: white;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .card-image:hover {
+        filter: opacity(1);
+    }
+}
