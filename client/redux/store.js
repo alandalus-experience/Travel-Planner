@@ -5,5 +5,5 @@ import rootReducer from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const makeStore = (context) =>
-  createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+	createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 export const wrapper = createWrapper(makeStore, { debug: true });

@@ -7,12 +7,12 @@ const mockStore = configureStore();
 const store = mockStore();
 
 describe('Home', () => {
-  it('renders without crashing', () => {
-    render(
-      <Provider store={store}>
-        <Home />
-      </Provider>
-    );
-    expect(screen.getByRole('heading', { name: 'App Overview' })).toBeInTheDocument();
-  });
+	it('renders without crashing', () => {
+		render(
+			<Provider store={store}>
+				<Home />
+			</Provider>
+		);
+		expect(screen.getByRole('heading', { name: 'App Overview' })).toBeInTheDocument();
+	});
 });

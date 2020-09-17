@@ -13,25 +13,25 @@ import firebase from '../utils/firebase';
 import '../styles/globals.scss';
 
 const App = ({ Component, pageProps }) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const unsub = firebase.auth().onAuthStateChanged((user) => {
-      user
-        ? dispatch(
-            loginSuccess({
-              uid: user.uid,
-              email: user.email,
-              emailVerified: user.emailVerified,
-              name: user.displayName
-            })
-          )
-        : dispatch(loginSuccess(null));
-    });
-    return () => {
-      unsub();
-    };
-  });
-  return <Component {...pageProps} />;
+	const dispatch = useDispatch();
+	useEffect(() => {
+		const unsub = firebase.auth().onAuthStateChanged((user) => {
+			user
+				? dispatch(
+						loginSuccess({
+							uid: user.uid,
+							email: user.email,
+							emailVerified: user.emailVerified,
+							name: user.displayName
+						})
+				  )
+				: dispatch(loginSuccess(null));
+		});
+		return () => {
+			unsub();
+		};
+	});
+	return <Component {...pageProps} />;
 };
 
 export default wrapper.withRedux(App);

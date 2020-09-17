@@ -27,5 +27,5 @@ Users can create trips where they are able to add itineraries, make before you g
 
  ## Additional info
  When you want to work on a feature or bug, please create a branch from the development branch and name it after the feature you are working on.
- When you are done with the task pust it up to GitHub and your code will be reviewed and merged to the development branch.
+ When you are done with the task push it up to GitHub and your code will be reviewed and merged to the development branch.
  ### ```NOTE:``` After successful contribution your name will be added to the contributors list

@@ -1,72 +1,72 @@
 .login-container {
-    display: flex;
-    margin: 40px 0;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	margin: 40px 0;
+	justify-content: center;
+	align-items: center;
 
-    .login {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid black;
-        border-radius: 4px;
-        padding: 50px;
-        min-width: 40vw;
-        min-height: 50vh;
+	.login {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid black;
+		border-radius: 4px;
+		padding: 50px;
+		min-width: 40vw;
+		min-height: 50vh;
 
-        .login-header {
-            font-size: 32px;
-            font-weight: 100;
-            margin: 25px 0; 
-        }
+		.login-header {
+			font-size: 32px;
+			font-weight: 100;
+			margin: 25px 0;
+		}
 
-        .third-party-signin {
-            margin-bottom: 20px;
-        }
+		.third-party-signin {
+			margin-bottom: 20px;
+		}
 
-        .email-register {
-            width: 100%;
-        }
-        .email-signin {
-            width: 100%;
-        }
-    }
+		.email-register {
+			width: 100%;
+		}
+		.email-signin {
+			width: 100%;
+		}
+	}
 }
 
 .form-helper-text {
-    font-size: 12px;
-    font-weight: 200;
-    opacity: 50%;
+	font-size: 12px;
+	font-weight: 200;
+	opacity: 50%;
 }
 
 .footer-text {
-    font-size: 11px;
-    font-weight: 200;
-    opacity: 70%;
-    padding-top: 15px;
+	font-size: 11px;
+	font-weight: 200;
+	opacity: 70%;
+	padding-top: 15px;
 }
 
 .footer-text-forgot {
-    font-size: 11px;
-    font-weight: 200;
-    opacity: 70%;
-    margin-top: 0;
+	font-size: 11px;
+	font-weight: 200;
+	opacity: 70%;
+	margin-top: 0;
 }
 
 .login-link {
-    color:rgb(223, 43, 43);
-    font-size: 12px;
+	color: rgb(223, 43, 43);
+	font-size: 12px;
 }
 
 .user-error {
-    position: fixed;
-    font-size: 12px;
-    text-align: center;
-    color: rgb(245, 245, 245);
-    margin: 0 0 20px;
-    padding: 2px 6px;
-    background-color: salmon;
-    border: 0 solid white;
-    border-radius: 4px;
+	position: fixed;
+	font-size: 12px;
+	text-align: center;
+	color: rgb(245, 245, 245);
+	margin: 0 0 20px;
+	padding: 2px 6px;
+	background-color: salmon;
+	border: 0 solid white;
+	border-radius: 4px;
 }

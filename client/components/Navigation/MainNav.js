@@ -12,24 +12,24 @@ import RightMainNav_LoggedOut from './LoggedOut/RightMainNav';
 import styles from '../../styles/MainNav.module.scss';
 
 const MainMenu = () => {
-  const user = useSelector((state) => state.user?.user);
-  return (
-    <ul className={styles['nav-container']}>
-      {user ? (
-        // If user is logged in
-        <>
-          <LeftMainNav_LoggedIn />
-          <RightMainNav_LoggedIn />
-        </>
-      ) : (
-        // If user is logged out
-        <>
-          <LeftMainNav_LoggedOut />
-          <RightMainNav_LoggedOut />
-        </>
-      )}
-    </ul>
-  );
+	const user = useSelector((state) => state.user?.user);
+	return (
+		<ul className={styles['nav-container']}>
+			{user ? (
+				// If user is logged in
+				<>
+					<LeftMainNav_LoggedIn />
+					<RightMainNav_LoggedIn />
+				</>
+			) : (
+				// If user is logged out
+				<>
+					<LeftMainNav_LoggedOut />
+					<RightMainNav_LoggedOut />
+				</>
+			)}
+		</ul>
+	);
 };
 
 export default MainMenu;

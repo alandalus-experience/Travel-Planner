@@ -9,17 +9,17 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../../redux/actions/userActions';
 
 const RightMainNav_LoggedIn = () => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  return (
-    <div>
-      <Link href="/">
-        <a onClick={() => dispatch(logoutUser())} style={{ cursor: 'pointer' }}>
-          Logout
-        </a>
-      </Link>
-    </div>
-  );
+	return (
+		<div>
+			<Link href="/">
+				<a onClick={() => dispatch(logoutUser())} style={{ cursor: 'pointer' }}>
+					Logout
+				</a>
+			</Link>
+		</div>
+	);
 };
 
 export default RightMainNav_LoggedIn;
