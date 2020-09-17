@@ -1,5 +1,5 @@
 // NextJS modules
-import Link from 'next/link'
+import Link from 'next/link';
 
 // React modules
 import React from 'react';
@@ -14,10 +14,12 @@ const RightMainNav_LoggedIn = () => {
   return (
     <div>
       <Link href="/">
-        <a onClick={() => dispatch(logoutUser())} style={{"cursor": "pointer"}}>Logout</a>
+        <a onClick={() => dispatch(logoutUser())} style={{ cursor: 'pointer' }}>
+          Logout
+        </a>
       </Link>
     </div>
-  )
-}
-  
-export default RightMainNav_LoggedIn
+  );
+};
+
+export default RightMainNav_LoggedIn;

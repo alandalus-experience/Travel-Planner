@@ -1,5 +1,5 @@
 // NextJS modules
-import Link from 'next/link'
+import Link from 'next/link';
 
 // React modules
 import React from 'react';
@@ -11,7 +11,7 @@ const LeftMainNav_LoggedOut = () => {
         <a>Home</a>
       </Link>
     </div>
-  )
-}
-  
-export default LeftMainNav_LoggedOut
+  );
+};
+
+export default LeftMainNav_LoggedOut;

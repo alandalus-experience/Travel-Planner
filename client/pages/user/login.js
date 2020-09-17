@@ -11,15 +11,15 @@ import MainNav from '../../components/Navigation/MainNav';
 import UserForm from '../../components/User/UserForm';
 
 const LoginUser = () => {
-  const user = useSelector(state => state.user?.user);
-  const loading = useSelector(state => state.user?.loading);
+  const user = useSelector((state) => state.user?.user);
+  const loading = useSelector((state) => state.user?.loading);
   useEffect(() => {
-    if ( user ) {
-      Router.push("/dashboard")
+    if (user) {
+      Router.push('/dashboard');
     }
-  })
+  });
   if (loading) {
-    return <></>
+    return <></>;
   }
   return (
     <>
@@ -31,6 +31,6 @@ const LoginUser = () => {
       <UserForm />
     </>
   );
-}
+};
 
 export default LoginUser;

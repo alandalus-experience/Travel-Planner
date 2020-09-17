@@ -1,6 +1,3 @@
-// NextJS modules
-import Link from 'next/link'
-
 // React modules
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -11,29 +8,28 @@ import RightMainNav_LoggedIn from './LoggedIn/RightMainNav';
 import LeftMainNav_LoggedOut from './LoggedOut/LeftMainNav';
 import RightMainNav_LoggedOut from './LoggedOut/RightMainNav';
 
-
-//Scoped stylings
-import styles from '../../styles/MainNav.module.scss'
+//Scoped styling
+import styles from '../../styles/MainNav.module.scss';
 
 const MainMenu = () => {
-  const user = useSelector(state => state.user?.user);
+  const user = useSelector((state) => state.user?.user);
   return (
-    <ul className={styles["nav-container"]}>
-      { user ? (
-      // If user is logged in
-      <>
-        <LeftMainNav_LoggedIn />
-        <RightMainNav_LoggedIn />
-      </>
+    <ul className={styles['nav-container']}>
+      {user ? (
+        // If user is logged in
+        <>
+          <LeftMainNav_LoggedIn />
+          <RightMainNav_LoggedIn />
+        </>
       ) : (
         // If user is logged out
-      <>
-        <LeftMainNav_LoggedOut />
-        <RightMainNav_LoggedOut />
-      </>
+        <>
+          <LeftMainNav_LoggedOut />
+          <RightMainNav_LoggedOut />
+        </>
       )}
     </ul>
-  )
-}
+  );
+};
 
 export default MainMenu;

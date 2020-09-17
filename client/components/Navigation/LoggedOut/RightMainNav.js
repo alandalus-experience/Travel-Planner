@@ -1,5 +1,5 @@
 // NextJS modules
-import Link from 'next/link'
+import Link from 'next/link';
 
 // React modules
 import React from 'react';
@@ -14,7 +14,7 @@ const RightMainNav_LoggedOut = () => {
         <a>Login</a>
       </Link>
     </div>
-  )
-}
-  
-export default RightMainNav_LoggedOut
+  );
+};
+
+export default RightMainNav_LoggedOut;

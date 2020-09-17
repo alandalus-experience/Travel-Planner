@@ -1,5 +1,5 @@
 // NextJS modules
-import Head from 'next/head'
+import Head from 'next/head';
 
 // React modules
 import React from 'react';
