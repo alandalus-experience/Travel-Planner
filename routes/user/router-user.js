@@ -1,15 +1,11 @@
-const express = require('express')
+const express = require('express');
 
-const { registerUser, loginUser } = require('../../api/controllers/controller-user')
+const { registerUser, loginUser } = require('../../api/controllers/controller-user');
 
-const router = express.Router()
+const router = express.Router();
 
-router
-  .route('/register')
-  .post(registerUser)
+router.route('/register').post(registerUser);
 
-router
-  .route('/login')
-  .post(loginUser)
+router.route('/login').post(loginUser);
 
-module.exports = router
+module.exports = router;
