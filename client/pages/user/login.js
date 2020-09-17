@@ -19,6 +19,8 @@ const LoginUser = () => {
 		}
 	});
 	if (loading) {
+		//Only works in production
+		Router.prefetch('/dashboard');
 		return <></>;
 	}
 	return (

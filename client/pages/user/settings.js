@@ -1,5 +1,6 @@
 // NextJS modules
 import Head from 'next/head';
+import Link from 'next/link';
 
 // React modules
 import React from 'react';
@@ -15,6 +16,9 @@ function Settings() {
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<MainNav />
+			<Link href="/user/settings/profile">
+				<a>Profile</a>
+			</Link>
 		</>
 	);
 }
