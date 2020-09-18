@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "label": "Run Server",
+      "dependsOn": [
+        "Front-end server",
+        "Back-end"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Front-end server",
+      "type": "shell",
+      "command": "cd client/ && npm run dev",
+      "presentation": {
+        "group": "Servers"
+      }
+    },
+    {
+      "label": "Back-end",
+      "type": "npm",
+      "script": "dev",
+      "presentation": {
+        "group": "Servers"
+      }
+    }
+  ]
+}
