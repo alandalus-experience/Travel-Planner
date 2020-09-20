@@ -38,12 +38,6 @@ export const loginStart = () => {
 		type: EMAIL_LOGIN
 	};
 };
-export const loginSuccess = (user) => {
-	return {
-		type: LOGIN_SUCCESS,
-		user
-	};
-};
 
 export const loginSuccess = (user) => {
 	return {
@@ -52,34 +46,34 @@ export const loginSuccess = (user) => {
 	};
 };
 
-export const loginFailure = error => {
-    switch(error.code) {
-        case "auth/wrong-password":
-            return {
-                type: LOGIN_FAILURE,
-                error: 'Incorrect username or password'
-            }
-        case "auth/invalid-email":
-            return {
-                type: LOGIN_FAILURE,
-                error: 'Please enter valid email address'
-            }
-        case "auth/user-disabled":
-            return {
-                type: LOGIN_FAILURE,
-                error: 'User is disabled, please contact support'
-            }
-        case "auth/user-not-found":
-            return {
-                type: LOGIN_FAILURE,
-                error: "User not found, please register"
-            }
-        default:
-            return {
-                type: LOGIN_FAILURE,
-                error: error.message
-            }
-    }
+export const loginFailure = (error) => {
+	switch (error.code) {
+		case 'auth/wrong-password':
+			return {
+				type: LOGIN_FAILURE,
+				error: 'Incorrect username or password'
+			};
+		case 'auth/invalid-email':
+			return {
+				type: LOGIN_FAILURE,
+				error: 'Please enter valid email address'
+			};
+		case 'auth/user-disabled':
+			return {
+				type: LOGIN_FAILURE,
+				error: 'User is disabled, please contact support'
+			};
+		case 'auth/user-not-found':
+			return {
+				type: LOGIN_FAILURE,
+				error: 'User not found, please register'
+			};
+		default:
+			return {
+				type: LOGIN_FAILURE,
+				error: error.message
+			};
+	}
 };
 
 export const signupSuccess = (user) => {
