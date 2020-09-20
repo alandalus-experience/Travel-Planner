@@ -1,14 +1,15 @@
 // NextJS modules
 import Link from 'next/link';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 // React modules
 import React from 'react';
 
 const LeftMainNav_LoggedIn = () => {
+	const router = useRouter();
 	return (
 		<div>
-			{Router.pathname === '/dashboard' ? (
+			{router.pathname === '/dashboard' ? (
 				<Link href="/">
 					<a>Home</a>
 				</Link>
