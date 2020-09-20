@@ -9,15 +9,15 @@ const tripSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now()
 	},
-	tripTitle: {
+	title: {
 		type: String,
 		required: true
 	},
-	fromDate: {
+	firstDay: {
 		type: Date,
 		required: true
 	},
-	toDate: {
+	lastDay: {
 		type: Date,
 		required: true
 	},
@@ -35,6 +35,9 @@ const tripSchema = new mongoose.Schema({
 	},
 	budget: {
 		type: Number
+	},
+	imageUrl: {
+		type: String,
 	}
 });
 
