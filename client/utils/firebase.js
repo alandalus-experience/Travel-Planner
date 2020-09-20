@@ -123,7 +123,7 @@ export const updateEmail = async (email) => {
 		//TODO:
 		// - Verify is user has signed in recently
 		// - If they did update email
-		// - If they didn`t prompt for login again
+		// - If they didn't prompt for login again
 		// - after send data to back-end
 		/*const response = await API.post(`/users/login`, user.user);
 		console.log(response.data.message);*/

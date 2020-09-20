@@ -45,34 +45,41 @@ export const loginSuccess = (user) => {
 	};
 };
 
-export const loginFailure = (error) => {
-	switch (error.code) {
-		case 'auth/wrong-password':
-			return {
-				type: LOGIN_FAILURE,
-				error: 'Incorrect username or password'
-			};
-		case 'auth/invalid-email':
-			return {
-				type: LOGIN_FAILURE,
-				error: 'Please enter valid email address'
-			};
-		case 'auth/user-disabled':
-			return {
-				type: LOGIN_FAILURE,
-				error: 'User is disabled, please contact support'
-			};
-		case 'auth/user-not-found':
-			return {
-				type: LOGIN_FAILURE,
-				error: 'User not found, please register'
-			};
-		default:
-			return {
-				type: LOGIN_FAILURE,
-				error: error.message
-			};
-	}
+export const loginSuccess = (user) => {
+	return {
+		type: LOGIN_SUCCESS,
+		user
+	};
+};
+
+export const loginFailure = error => {
+    switch(error.code) {
+        case "auth/wrong-password":
+            return {
+                type: LOGIN_FAILURE,
+                error: 'Incorrect username or password'
+            }
+        case "auth/invalid-email":
+            return {
+                type: LOGIN_FAILURE,
+                error: 'Please enter valid email address'
+            }
+        case "auth/user-disabled":
+            return {
+                type: LOGIN_FAILURE,
+                error: 'User is disabled, please contact support'
+            }
+        case "auth/user-not-found":
+            return {
+                type: LOGIN_FAILURE,
+                error: "User not found, please register"
+            }
+        default:
+            return {
+                type: LOGIN_FAILURE,
+                error: error.message
+            }
+    }
 };
 
 export const signupSuccess = (user) => {
@@ -135,9 +142,13 @@ export const logoutUser = () => async (dispatch) => {
 	}
 };
 
-export const emailLogin = (email, password) => (dispatch) => {
-	dispatch(loginStart());
-	loginUser(email, password);
+export const emailLogin = (email, password) => async (dispatch) => {
+	try {
+		dispatch(loginStart());
+		await loginUser(email, password);
+	} catch (e) {
+		dispatch(loginFailure(e));
+	}
 };
 
 export const googleLogin = () => async (dispatch) => {
@@ -174,12 +185,20 @@ export const facebookLogin = () => async (dispatch) => {
 	}
 };
 
-export const emailSignup = (email, password, verifyEmail) => (dispatch) => {
-	dispatch(signupStart());
-	registerUser(email, password, verifyEmail);
-	dispatch(signupSuccess());
+export const emailSignup = (email, password, verifyEmail) => async (dispatch) => {
+	try {
+		dispatch(signupStart());
+		await registerUser(email, password, verifyEmail);
+		dispatch(signupSuccess());
+	} catch (e) {
+		signupFailure(e);
+	}
 };
 
-export const sendResetPassword = (email) => () => {
-	sendPasswordResetLink(email);
+export const sendResetPassword = (email) => async () => {
+	try {
+		await sendPasswordResetLink(email);
+	} catch (e) {
+		console.log(e);
+	}
 };
