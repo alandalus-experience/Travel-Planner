@@ -6,11 +6,11 @@
     },
     "extends": [
         "eslint:recommended",
-        "prettier",
-        "plugin:node/recommended"
+        "prettier"
     ],
     "parserOptions": {
-        "ecmaVersion": 2020
+        "ecmaVersion": 2020,
+        "sourceType": "module"
     },
     "plugins": [
         "prettier"
@@ -32,12 +32,6 @@
             "error",
             "always"
         ],
-        "prettier/prettier": "error",
-        "node/prefer-global/console": [
-            "error", "always"
-        ],
-        "node/prefer-global/process": [
-            "error", "always"
-        ]
+        "prettier/prettier": "error"
     }
 }
