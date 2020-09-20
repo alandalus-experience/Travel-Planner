@@ -11,25 +11,30 @@ const connectDB = require('./config/db')
 
 dotenv.config({ path: './config/config.env' })
 
-const httpPort = (!process.env.PORT ? 80 : process.env.PORT)
+const httpPort = process.env.PORT || 80;
 
 const app = express()
 const httpServer = http.createServer(app)
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 connectDB()
 
-
+//Logging with morgan
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
+//Create the log string structure for morgan
 app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms', { stream: accessLogStream }))
 app.use(express.urlencoded({ extended: false }))
-app.use(cors())
+let corsOptions = {
+  origin: process.env.CLIENTURL || '*',
+  optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions))
 app.use(express.json())
 
 app.use('/', require('./routes/router-index'))

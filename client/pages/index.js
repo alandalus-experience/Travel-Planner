@@ -1,86 +1,35 @@
-// import Head from 'next/head'
-// import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import React from 'react';
 
-// import React from 'react';
-import API from './api/api';
+import MainNav from '../components/Navigation/MainNav';
 
+// Left it here for future use
+// import styles from '../styles/Home.module.scss'
 
-export default function Home() {
+//Back-end routing
+// import API from './api/api';
 
-  API.get(`/`)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        if (error.response) {
-            console.log(error.response.data);
-        } else if (error.request) {
-            console.log(error.request);
-        } else {
-            console.log('Error', error.message);
-        }
-      }
-      )
-  return (null)
+const Home = () => {
+	return (
+		<>
+			<Head>
+				<title>Travel Planner - Home</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
+			<MainNav />
+			<h1 style={{ textAlign: 'center' }}>App Overview</h1>
+			<div
+				className="text-container"
+				style={{ margin: '0 10%', textAlign: 'justify', textJustify: 'inter-word' }}>
+				<p>
+					Users can create trips where they are able to add itineraries, make before you go todo
+					lists, add reservation details, tickets, or any important information about the trip,
+					track budgets of each spending. This will be the feature list for the MVP version, but
+					more functionality will be added as we progress.
+				</p>
+			</div>
+		</>
+	);
+};
 
-    
-  //   <div className={styles.container}>
-  //     <Head>
-  //       <title>Create Next App</title>
-  //       <link rel="icon" href="/favicon.ico" />
-  //     </Head>
-
-  //     <main className={styles.main}>
-  //       <h1 className={styles.title}>
-  //         Welcome to <a href="https://nextjs.org">Next.js!</a>
-  //       </h1>
-
-  //       <p className={styles.description}>
-  //         Get started by editing{' '}
-  //         <code className={styles.code}>pages/index.js</code>
-  //       </p>
-
-  //       <div className={styles.grid}>
-  //         <a href="https://nextjs.org/docs" className={styles.card}>
-  //           <h3>Documentation &rarr;</h3>
-  //           <p>Find in-depth information about Next.js features and API.</p>
-  //         </a>
-
-  //         <a href="https://nextjs.org/learn" className={styles.card}>
-  //           <h3>Learn &rarr;</h3>
-  //           <p>Learn about Next.js in an interactive course with quizzes!</p>
-  //         </a>
-
-  //         <a
-  //           href="https://github.com/vercel/next.js/tree/master/examples"
-  //           className={styles.card}
-  //         >
-  //           <h3>Examples &rarr;</h3>
-  //           <p>Discover and deploy boilerplate example Next.js projects.</p>
-  //         </a>
-
-  //         <a
-  //           href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-  //           className={styles.card}
-  //         >
-  //           <h3>Deploy &rarr;</h3>
-  //           <p>
-  //             Instantly deploy your Next.js site to a public URL with Vercel.
-  //           </p>
-  //         </a>
-  //       </div>
-  //     </main>
-
-  //     <footer className={styles.footer}>
-  //       <a
-  //         href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Powered by{' '}
-  //         <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-  //       </a>
-  //     </footer>
-  //   </div>
-}
+export default Home;
