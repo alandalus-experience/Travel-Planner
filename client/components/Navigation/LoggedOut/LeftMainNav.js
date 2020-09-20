@@ -1,5 +1,6 @@
 // NextJS modules
 import Link from 'next/link';
+import Router from 'next/router';
 
 // React modules
 import React from 'react';
@@ -7,9 +8,11 @@ import React from 'react';
 const LeftMainNav_LoggedOut = () => {
 	return (
 		<div>
-			<Link href="/">
-				<a>Home</a>
-			</Link>
+			{Router.pathname === '/' ? null : (
+				<Link href="/">
+					<a>Home</a>
+				</Link>
+			)}
 		</div>
 	);
 };
