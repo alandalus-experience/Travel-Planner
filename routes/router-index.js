@@ -1,11 +1,13 @@
 const express = require('express');
 
 const users = require('./user/router-user');
+const trips = require('./trip/router-trip');
 
 const router = express.Router();
 
 //Everything related to users will be handled by this route
 router.use('/users', users);
+router.use('/trips', trips);
 
 //Landing page
 //FIXME: Has to be changed

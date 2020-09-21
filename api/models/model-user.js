@@ -7,6 +7,9 @@ const userSchema = new mongoose.Schema({
 		unique: true,
 		default: false
 	},
+	trip_id: {
+		type: [mongoose.Schema.Types.ObjectId],
+	},
 	email: {
 		type: String,
 		required: true,

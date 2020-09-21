@@ -2,10 +2,9 @@ const User = require('../models/model-user');
 
 exports.registerUser = async (req, res) => {
 	const request = req.body;
-
 	try {
 		const query = {
-			user_id: request.uid,
+			user_id: request.id,
 			email: request.email,
 			emailVerified: request.emailVerified,
 			createdAt: request.createdAt,
