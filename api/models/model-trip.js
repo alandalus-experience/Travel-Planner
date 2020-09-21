@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Country = require('./model-country');
 
 const tripSchema = new mongoose.Schema({
 	user_id: {
@@ -21,11 +22,10 @@ const tripSchema = new mongoose.Schema({
 		type: Date,
 		required: true
 	},
-	//Might be good to make it's own schema later on because we might be using it elsewhere too
-	countries: {
-		type: Array,
-		required: true
-	},
+	countries: [{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: Country,
+		}],
 	baseCurrency: {
 		type: String,
 		required: true

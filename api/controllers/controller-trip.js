@@ -10,11 +10,12 @@ exports.createTrip = async (req, res) => {
 			title: request.title,
 			firstDay: request.firstDay,
 			lastDay: request.lastDay,
-			// TODO: Find the way to store countries in DB
-			// countries:
+			countries: request.countries,
 			baseCurrency: request.baseCurrency,
+			//TODO: Based on the countries selected populate the additional currencies to the array
 			additionalCurrencies: request.additionalCurrencies,
 			budget: request.budget,
+			//TODO: work on the Unsplash image API to get the images based on the country
 			imageUrl: request.imageUrl
 		};
 

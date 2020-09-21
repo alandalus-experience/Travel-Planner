@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Trip = require('./model-trip');
 
 const userSchema = new mongoose.Schema({
 	user_id: {
@@ -7,9 +8,10 @@ const userSchema = new mongoose.Schema({
 		unique: true,
 		default: false
 	},
-	trip_id: {
-		type: [mongoose.Schema.Types.ObjectId],
-	},
+	trip_id: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: Trip,
+	}],
 	email: {
 		type: String,
 		required: true,
