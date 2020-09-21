@@ -14,8 +14,7 @@ exports.createTrip = async (req, res) => {
 		lastDay: request.lastDay,
 		countries: request.countries,
 		baseCurrency: request.baseCurrency,
-		//TODO: Based on the countries selected populate the additional currencies to the array
-		additionalCurrencies: await addAdditionalCurrencies(request.countries),
+		additionalCurrencies: await addAdditionalCurrencies(request.countries, request.baseCurrency),
 		budget: request.budget,
 		//TODO: work on the Unsplash image API to get the images based on the country
 		imageUrl: request.imageUrl
@@ -82,7 +81,7 @@ exports.addUserToTrip = async (req, res) => {
 	}
 };
 
-const addAdditionalCurrencies = async (countries) => {
+const addAdditionalCurrencies = async (countries, baseCurrency) => {
 	// The array to be populated with currencies from the countries
 	const currencies = [];
 
@@ -91,7 +90,14 @@ const addAdditionalCurrencies = async (countries) => {
 		const countryList = await Country.find({ _id: { $in: countries } });
 
 		for (let i = 0; countryList.length > i; i++) {
-			countryList[i].currency.forEach((e) => { currencies.push(e); });
+
+			countryList[i].currency.forEach((currency) => {
+				//Checks if the currency is already in the array or it's the base currency
+				if(currencies.includes(currency) || currency === baseCurrency) {
+					return;
+				}
+				currencies.push(currency);
+			});
 		}
 		return currencies;
 	} catch (err) {
