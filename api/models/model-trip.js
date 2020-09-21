@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Country = require('./model-country');
 
 const tripSchema = new mongoose.Schema({
-	user_id: {
+	user_id: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'user'
-	},
+	}],
 	createdAt: {
 		type: Date,
 		default: Date.now()
@@ -30,6 +30,7 @@ const tripSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	// TODO: fix additional currencies schema
 	additionalCurrencies: {
 		type: String
 	},

@@ -3,21 +3,21 @@ const User = require('../models/model-user');
 
 exports.createTrip = async (req, res) => {
 	const request = req.body;
+	const query = {
+		user_id: request.user_id,
+		title: request.title,
+		firstDay: request.firstDay,
+		lastDay: request.lastDay,
+		countries: request.countries,
+		baseCurrency: request.baseCurrency,
+		//TODO: Based on the countries selected populate the additional currencies to the array
+		additionalCurrencies: request.additionalCurrencies,
+		budget: request.budget,
+		//TODO: work on the Unsplash image API to get the images based on the country
+		imageUrl: request.imageUrl
+	};
 
 	try {
-		const query = {
-			user_id: request.user_id,
-			title: request.title,
-			firstDay: request.firstDay,
-			lastDay: request.lastDay,
-			countries: request.countries,
-			baseCurrency: request.baseCurrency,
-			//TODO: Based on the countries selected populate the additional currencies to the array
-			additionalCurrencies: request.additionalCurrencies,
-			budget: request.budget,
-			//TODO: work on the Unsplash image API to get the images based on the country
-			imageUrl: request.imageUrl
-		};
 
 		//TODO:
 		// Add a way to let more users get assigned to the same trip
@@ -43,6 +43,31 @@ exports.createTrip = async (req, res) => {
 
 	} catch (error) {
 		// TODO: Add proper error handling
+		res.status(500).json({
+			status: 500,
+			message: 'Something went wrong'
+		});
+	}
+};
+
+exports.addUserToTrip = async (req, res) => {
+	const request = req.body;
+	const query = {
+		user_id: request.user_id,
+		trip_id: request.trip_id
+	};
+	try {
+		let user = await User.findById(query.user_id);
+		let trip = await Trip.findById(query.trip_id);
+
+		if(user && trip) {
+			user.trip_id.push(query.trip_id);
+			trip.user_id.push(query.user_id);
+
+			await user.save();
+			await trip.save();
+		}
+	} catch (error) {
 		res.status(500).json({
 			status: 500,
 			message: 'Something went wrong'
