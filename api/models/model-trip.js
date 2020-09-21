@@ -30,9 +30,8 @@ const tripSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	// TODO: fix additional currencies schema
 	additionalCurrencies: {
-		type: String
+		type: Array
 	},
 	budget: {
 		type: Number

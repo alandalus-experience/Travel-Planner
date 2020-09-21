@@ -1,8 +1,12 @@
+const mongoose = require('mongoose');
+
 const Trip = require('../models/model-trip');
 const User = require('../models/model-user');
+const Country = require('../models/model-country');
 
 exports.createTrip = async (req, res) => {
 	const request = req.body;
+	try {
 	const query = {
 		user_id: request.user_id,
 		title: request.title,
@@ -11,13 +15,16 @@ exports.createTrip = async (req, res) => {
 		countries: request.countries,
 		baseCurrency: request.baseCurrency,
 		//TODO: Based on the countries selected populate the additional currencies to the array
-		additionalCurrencies: request.additionalCurrencies,
+		additionalCurrencies: await addAdditionalCurrencies(request.countries),
 		budget: request.budget,
 		//TODO: work on the Unsplash image API to get the images based on the country
 		imageUrl: request.imageUrl
 	};
 
-	try {
+
+
+/*		const additionalCurrencies = await addAdditionalCurrencies(query.countries);
+		console.log('currencies after the function call: ', additionalCurrencies);*/
 
 		//TODO:
 		// Add a way to let more users get assigned to the same trip
@@ -72,5 +79,22 @@ exports.addUserToTrip = async (req, res) => {
 			status: 500,
 			message: 'Something went wrong'
 		});
+	}
+};
+
+const addAdditionalCurrencies = async (countries) => {
+	// The array to be populated with currencies from the countries
+	const currencies = [];
+
+	try {
+		//List the countries that has in the trip to get the currencies later on
+		const countryList = await Country.find({ _id: { $in: countries } });
+
+		for (let i = 0; countryList.length > i; i++) {
+			countryList[i].currency.forEach((e) => { currencies.push(e); });
+		}
+		return currencies;
+	} catch (err) {
+		console.error(err);
 	}
 };
