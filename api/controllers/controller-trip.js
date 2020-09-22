@@ -3,9 +3,13 @@ const mongoose = require('mongoose');
 const Trip = require('../models/model-trip');
 const User = require('../models/model-user');
 const Country = require('../models/model-country');
+const { getRandomLocationPhoto } = require('../unsplash/unsplashFetcher');
+
+
 
 exports.createTrip = async (req, res) => {
 	const request = req.body;
+
 	try {
 	const query = {
 		user_id: request.user_id,
@@ -17,16 +21,8 @@ exports.createTrip = async (req, res) => {
 		additionalCurrencies: await addAdditionalCurrencies(request.countries, request.baseCurrency),
 		budget: request.budget,
 		//TODO: work on the Unsplash image API to get the images based on the country
-		imageUrl: request.imageUrl
+		imageUrl: await addPhotoURL(request.countries)
 	};
-
-
-
-/*		const additionalCurrencies = await addAdditionalCurrencies(query.countries);
-		console.log('currencies after the function call: ', additionalCurrencies);*/
-
-		//TODO:
-		// Add a way to let more users get assigned to the same trip
 
 		let user = await User.findById(query.user_id);
 
@@ -102,5 +98,21 @@ const addAdditionalCurrencies = async (countries, baseCurrency) => {
 		return currencies;
 	} catch (err) {
 		console.error(err);
+	}
+};
+
+const addPhotoURL = async (countries) => {
+	let URL;
+	try {
+		const countryList = await Country.find({ _id: { $in: countries } });
+
+		console.log('The first country returned from the trip: ', countryList[0].name.common);
+
+		URL = getRandomLocationPhoto(countryList[0].name.common);
+		console.log('The URL to be saved: ', URL);
+		return URL;
+
+	} catch (error) {
+		console.log(error);
 	}
 };
