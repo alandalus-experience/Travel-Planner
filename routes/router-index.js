@@ -6,12 +6,12 @@ const trips = require('./trip/router-trip');
 const router = express.Router();
 
 //Everything related to users will be handled by this route
-router.use('/users', users);
-router.use('/trips', trips);
+router.use('/user', users);
+router.use('/trip', trips);
 
 //Landing page
 //FIXME: Has to be changed
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
 	res.status(200).json({
 		status: 200,
 		message: 'hello from the index page'

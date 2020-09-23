@@ -24,7 +24,7 @@ export const registerUser = async (email, password, verifyEmail = true) => {
 	try {
 		const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
 		// console.log(user.user)
-		const response = await API.post(`/users/register`, user.user);
+		const response = await API.post(`/user/register`, user.user);
 		if (verifyEmail) {
 			if (response.status === 201) await sendEmailVerificationLink();
 		}
@@ -36,7 +36,7 @@ export const registerUser = async (email, password, verifyEmail = true) => {
 export const loginUser = async (email, password) => {
 	try {
 		const user = await firebase.auth().signInWithEmailAndPassword(email, password);
-		const response = await API.post(`/users/login`, user.user);
+		const response = await API.post(`/user/login`, user.user);
 		console.log(response.data.message);
 	} catch (error) {
 		handleError(error);
@@ -84,7 +84,7 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 export const SignInWithGoogle = async () => {
 	try {
 		const user = await firebase.auth().signInWithPopup(googleProvider);
-		await API.post(`/users/register`, user.user);
+		await API.post(`/user/register`, user.user);
 	} catch (error) {
 		handleError(error);
 	}
@@ -96,7 +96,7 @@ facebookProvider.setCustomParameters({ display: 'popup' });
 export const SignInWithFacebook = async () => {
 	try {
 		const user = await firebase.auth().signInWithPopup(facebookProvider);
-		await API.post(`/users/register`, user.user);
+		await API.post(`/user/register`, user.user);
 	} catch (error) {
 		handleError(error);
 	}
