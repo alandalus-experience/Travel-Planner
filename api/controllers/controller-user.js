@@ -7,7 +7,7 @@ const Trip = require('../models/model-trip');
 // @access Private
 exports.registerUser = async (req, res) => {
 	const request = req.body;
-	console.log(request);
+
 	try {
 		const query = {
 			user_id: request.uid,
