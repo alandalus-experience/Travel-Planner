@@ -46,16 +46,28 @@ const UserForm = (props) => {
         </div>
         <p className={styles['form-helper-text']}>- OR USING EMAIL -</p>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
+          <article className={styles["user-error"]}>
+            {
+              errors.Email ? 
+              errors.Email && errors.Email.message
+              : (
+                errors.Password ? 
+                errors.Password && errors.Password.message
+                : (
+                    errors.Password2 ? 
+                    errors.Password2 && errors.Password2.message
+                    : ''
+                  )
+              )
+            }
+          </article>
           <div>
             <input type="text" placeholder="Email" name="Email" ref={register(formValidators.input.email)} />
-            {errors?.Email?.message && <p className={styles["user-error"]}>{errors.Email.message}</p>}
           </div>
           <div>
             <input type="password" placeholder="Password" name="Password" ref={register(formValidators.input.password)} />
-            {errors?.Password?.message && <p className={styles["user-error"]}>{errors.Password.message}</p>}
           </div>
             { router.pathname === "/user/register" ? <input type="password" placeholder="Confirm Password" name="Password2" ref={register({validate: (value) => formValidators.input.passwordConfirm(value, watch)})} /> : null }
-            {errors?.Password2?.message && <p className={styles["user-error"]}>{errors.Password2.message}</p>}
           <div>
             <input type="submit" value={ router.pathname === "/user/register" ? "Register" : "Login"} />
           </div>
