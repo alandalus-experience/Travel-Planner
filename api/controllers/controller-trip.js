@@ -72,6 +72,46 @@ exports.createTrip = async (req, res) => {
 	}
 };
 
+// @route DELETE /trip/delete
+// @desc Delete trip
+// @access Private
+exports.deleteTrip = async (req, res) => {
+	const request = req.body;
+
+	try {
+		const query = {
+			trip_id: request.trip_id
+		};
+		// Find the trip and delete it
+		await Trip.findByIdAndDelete(query.trip_id, async (err) => {
+			if (err) {
+				// 500 Internal server error
+				res.status(500).json({
+					status: 500,
+					message: 'Something went wrong'
+				});
+			} else {
+				// If the trip was assigned to a user delete trip_id from the array
+				await User.updateMany(
+					{ trip_id: { $in: query.trip_id } },
+					{ $pull: { trip_id: { $in: query.trip_id } } }
+				);
+				// 200 OK
+				res.status(200).json({
+					status: 200,
+					message: 'Trip has been deleted'
+				});
+			}
+		});
+	} catch (error) {
+		// 500 Internal server error
+		res.status(500).json({
+			status: 500,
+			message: 'Something went wrong'
+		});
+	}
+};
+
 // @route PATCH /trip/adduser
 // @desc Add travelers to a trip
 // @access Private
