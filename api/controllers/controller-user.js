@@ -1,5 +1,6 @@
 // Models
 const User = require('../models/model-user');
+const Trip = require('../models/model-trip');
 
 // @route POST /user/register
 // @desc Register user
@@ -96,13 +97,21 @@ exports.deleteUser = async (req, res) => {
 			user_id: request.uid
 		};
 
-		await User.findByIdAndDelete(query.user_id, (err) => {
+		// Find the user with the specified ID
+		await User.findByIdAndDelete(query.user_id, async (err) => {
 			if (err) {
+				// 500 Internal server error
 				res.status(500).json({
 					status: 500,
 					message: 'Something went wrong'
 				});
 			} else {
+				// If the user was assigned to a trip delete user_id from the array
+				await Trip.updateMany(
+					{ user_id: { $in: query.user_id } },
+					{ $pull: { user_id: { $in: query.user_id } } },
+				);
+				// 200 OK
 				res.status(200).json({
 					status: 200,
 					message: 'User has been deleted'

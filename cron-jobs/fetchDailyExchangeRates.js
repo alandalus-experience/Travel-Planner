@@ -11,7 +11,11 @@ exports.fetchDailyExchangeRates = cron.schedule('0 1 * * *', async () => {
 		const resJSON = await res.json();
 		const rates = new Rates(resJSON);
 		await rates.save();
-		console.log('Rates have been saved!!!');
+
+		const date = new Date();
+		const formattedDate = date.toLocaleTimeString();
+		
+		console.log(`${formattedDate} - Rates have been saved!!!`);
 	} catch (error) {
 		console.log(error);
 	}

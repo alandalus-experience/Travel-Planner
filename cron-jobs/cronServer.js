@@ -4,6 +4,8 @@ const http = require('http');
 
 const connectDB = require('../config/db');
 const fetchDailyExchangeRates = require('./fetchDailyExchangeRates');
+const cleanupEmptyTrips = require('./cleanupEmptyTrips');
+
 
 dotenv.config({ path: '../config/config.env' });
 
@@ -21,6 +23,8 @@ app.use(express.json());
 
 // Get daily exchange rates from the API at 01:00
 fetchDailyExchangeRates;
+// Delets trips that don't have user_id reference to them
+cleanupEmptyTrips;
 
 httpServer.listen(httpPort, () => {
 	console.log(`Cron server is alive on port: ${httpPort} runnign as: ${process.env.NODE_ENVIROMENT}`);
