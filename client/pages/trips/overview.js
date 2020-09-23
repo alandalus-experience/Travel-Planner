@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 
 import MainMenu from '../../components/Navigation/MainNav';
 import SwitchBar from '../../components/Trips/SwitchBar';
