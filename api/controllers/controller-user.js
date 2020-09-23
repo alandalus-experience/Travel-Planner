@@ -1,6 +1,6 @@
-const Trip = require('../models/model-trip');
 // Models
 const User = require('../models/model-user');
+const Trip = require('../models/model-trip');
 
 // @route POST /user/register
 // @desc Register user
@@ -109,7 +109,7 @@ exports.deleteUser = async (req, res) => {
 				// If the user was assigned to a trip delete user_id from the array
 				await Trip.updateMany(
 					{ user_id: { $in: query.user_id } },
-					{ $pull: { user_id: { $in: query.user_id } } }
+					{ $pull: { user_id: { $in: query.user_id } } },
 				);
 				// 200 OK
 				res.status(200).json({
