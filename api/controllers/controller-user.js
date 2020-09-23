@@ -97,7 +97,7 @@ exports.deleteUser = async (req, res) => {
 			user_id: request.uid
 		};
 
-		// Find the user with the specified ID
+		// Find the user with the specified ID and delete it
 		await User.findByIdAndDelete(query.user_id, async (err) => {
 			if (err) {
 				// 500 Internal server error
