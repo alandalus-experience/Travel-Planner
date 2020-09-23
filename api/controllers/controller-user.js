@@ -21,6 +21,7 @@ exports.registerUser = async (req, res) => {
 
 			await user.save();
 
+			// 201 Created
 			return res.status(201).json({
 				status: 201,
 				data: {
@@ -29,12 +30,14 @@ exports.registerUser = async (req, res) => {
 				}
 			});
 		} else {
+			// 409 Conflict
 			return res.status(409).json({
 				status: 409,
 				message: 'The email address is already in use by another account'
 			});
 		}
 	} catch (error) {
+		// 500 Internal server error
 		res.status(500).json({
 			status: 500,
 			message: 'Something went wrong'
@@ -63,12 +66,14 @@ exports.loginUser = async (req, res) => {
 				);
 				console.log('Email is verified now!');
 			}
+			// 200 OK
 			res.status(200).json({
 				status: 200,
 				message: 'You are logged in!!!'
 			});
 		}
 	} catch (error) {
+		// 500 Internal server error
 		res.status(500).json({
 			status: 500,
 			message: 'Something went wrong'
