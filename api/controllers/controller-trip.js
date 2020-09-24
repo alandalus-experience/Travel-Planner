@@ -170,6 +170,54 @@ exports.addUserToTrip = async (req, res) => {
 	}
 };
 
+// @route PATCH /trip/removeuser
+// @desc Remove traveler from a trip
+// @access Private
+exports.removeUserFromTrip = async (req, res) => {
+	const request = req.body;
+
+	try {
+		// Add necessary info into query object
+		const query = {
+			user_id: request.user_id,
+			trip_id: request.trip_id
+		};
+
+		// Get user and trip
+		const trip = await Trip.findById(query.trip_id);
+		const user = await User.findById(query.user_id);
+		
+		// Loop through trips to find the user_id and remove it
+		trip.user_id.map(user_id => {
+			if (String(user_id) === String(request.user_id)) {
+				trip.user_id.splice(trip.user_id.indexOf(user_id), 1);
+			}
+		});
+
+		// Loop through users to find the trip_id and remove it
+		user.trip_id.map(trip_id => {;
+			if (String(trip_id) === String(request.trip_id)) {
+				user.trip_id.splice(user.trip_id.indexOf(trip_id), 1);
+			}
+		});
+
+		await trip.save();
+		await user.save();
+		// 200 OK
+		res.status(200).json({
+			status: 200,
+			message: 'User has been removed from the trip'
+		});
+	} catch (error) {
+		// 500 Internal server error
+		res.status(500).json({
+			status: 500,
+			message: 'Something went wrong',
+			error: error
+		});
+	}
+};
+
 const addAdditionalCurrencies = async (countries, baseCurrency) => {
 	// The array to be populated with currencies from the countries
 	const currencies = [];
