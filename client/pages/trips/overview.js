@@ -11,10 +11,15 @@ import EmptyMessage from '../../components/Trips/EmptyMessage';
 import TRIPS from '../../../data';
 
 import styles from '../../styles/overview.module.scss';
+import API from '../../utils/api';
 
 const TripsOverview = () => {
 
-    const [ content, showContent ] = useState('upcoming');
+	const [ content, showContent ] = useState('upcoming');
+
+		// This it where you have to make the API call to get the actual data from the database
+		// Everything is already set on the back-end so we only have to place the data where it has to be.
+		// API.post('/trip/gettrips', user);
 
     /* Filtering TRIPS data */
 

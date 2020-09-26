@@ -72,6 +72,37 @@ exports.createTrip = async (req, res) => {
 	}
 };
 
+// @route POST /trip/gettrips
+// @desc Get the trips based on the firebase uid of the user
+// @access Private
+exports.getTrips = async (req, res) => {
+	const request = req.body;
+
+	try {
+		const query = {
+			user_id: request.uid
+		};
+		// Get the user and populate the user.trip_id fields with actual data
+		await User.findOne({ user_id: query.user_id }).populate('trip_id').exec(function(err, trips) {
+			if (trips) {
+				res.status(200).json(trips);
+			} else {
+				// 500 Internal server error
+				res.status(500).json({
+					status: 500,
+					message: err.message
+				});
+			}
+		});
+	} catch (error) {
+		// 500 Internal server error
+		res.status(500).json({
+			status: 500,
+			message: error.message
+		});
+	}
+};
+
 // @route DELETE /trip/delete
 // @desc Delete trip
 // @access Private
@@ -218,6 +249,7 @@ exports.removeUserFromTrip = async (req, res) => {
 	}
 };
 
+// Add additional currencies based on the countries
 const addAdditionalCurrencies = async (countries, baseCurrency) => {
 	// The array to be populated with currencies from the countries
 	const currencies = [];
