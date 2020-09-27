@@ -42,8 +42,11 @@ If you don't have nodemon installed globally run this:
  If you use VSCode as you code editor, you can run the 3 servers with one task. 
  ./.vscode/tasks.json has a task included so you can run this task and spin up the 3 servers togeter separated into 3 tabs. In theory VSCode should have it included already under tasks. You can open The __Terminal__ tab and click on __Run Task__. In the dropdown look for __Run server__ and click on it.
 
- ### ```Run the servers in the OS terminal```
- After you finished setting up the back and front-end, you should have all the npm packages installed, so the only thing you have to do is run the srcipt below from the root of the project.  
+### ___```Additional option for Linux and OSX users```___
+ ### ```Run the servers in the terminal```
+Install ttab:   
+```$ npm i ttab --save-dev```  
+After installation you can use: 
  ```$ npm run all```
 
  ## Additional info
