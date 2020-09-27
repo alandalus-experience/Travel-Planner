@@ -6,6 +6,9 @@ Travel planner app made with MERN stack and NextJS.
 Users can create trips where they are able to add itineraries, make before you go todo lists, add reservation details, tickets, or any important information about the trip, track budgets of each spending. This will be the feature list for the MVP version, but more functionality will be added as we progress.
 
 ## Project setup 
+If you don't have nodemon installed globally run this:  
+```$ npm i nodemon --save-dev```
+
 ### ```Back-end```
  1. Clone the repo from ```Development branch```, that contains the latest working features.
  2. After cloning the repo you will need to create a development database with MongoDB.
