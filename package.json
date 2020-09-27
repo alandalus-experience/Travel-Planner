@@ -5,9 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "all": "ttab \"npm run dev\" & ttab \"cd client; npm run dev\"",
+    "all": "ttab \"npm run dev\" & ttab \"cd client; npm run dev\" & ttab \"cd cron-jobs; node cronServer.js\"",
     "dev": "nodemon server.js",
-    "start": "pm2 start"
+    "start": "pm2 start",
+    "cron": "cd cron-jobs/ && node cronServer.js"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "ttab": "^0.7.0"
   }
 }
